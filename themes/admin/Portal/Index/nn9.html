@@ -1,0 +1,36 @@
+ <div class="alertBack"></div> 
+    <div class="mainPart" style="height: 220.78px; margin-top: -113.39px;">
+     <div class="backImg">
+      <div class="blackImg" style="height: 145.406px;"></div>
+     </div> 
+     <div class="alertText" style="top: 20.877px; height: 8vh; line-height: 5vh; padding: 0.8vh 0px">
+       
+       
+       <div>
+	   <a>{$titlexx}区：九人斗牛{$room.roomid}房间</a> 
+	   
+	    <br />
+		<a>链接已复制到剪贴板，粘贴微信聊天邀请好友</a> 
+      <br />
+	
+      </div>
+     </div> 
+    <!----> 
+     <div>
+      
+
+      </div> 
+       
+<div  class="buttonCenter"  data-clipboard-action="copy" data-clipboard-target="#copyUrl"onclick="public('tishi')">
+    <div id="btn" data-clipboard-text="1">
+      <textarea id="room_str" value="">{$skin[$fangzhu['password']]}区：九人斗牛{$room.roomid}房间
+	  进房密码：{$room.roomid}        
+	  房间链接：http://{$_SERVER['HTTP_HOST']}/room/{$room.id}  
+</textarea>
+<textarea id="copyUrl" value=""></textarea>
+<div class="attention">复制成功</div>
+   </div> 
+
+
+      </div>
+     </div>

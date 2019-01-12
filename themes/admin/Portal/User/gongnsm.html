@@ -1,0 +1,1041 @@
+<html>
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<title>通知与反馈</title>
+<!-- <link rel="shortcut icon" type="image/x-icon" href="http://qcce.gxlyjd.com/files/images/card/logo.png" />  -->
+
+<!--  <link rel="stylesheet" href="http://8.url.cn/edu/classroom/assets/lib/reset.css"> -->
+
+<script src="http://goss.fexteam.com/files/js/jquery-1.9.1.min.js"></script>
+<!-- <script src="https://gameoss.fexteam.com/files/box/js/jquery-1.4.2.min.js"></script>
+<script src="https://gameoss.fexteam.com/files/box/js/jquery.mousewheel.js"></script>
+<script src="https://gameoss.fexteam.com/files/box/js/jquery.jscrollpane.min.js"></script>
+<script src="https://gameoss.fexteam.com/files/box/js/scroll-startstop.events.jquery.js"></script> -->
+<script type="text/javascript" src="http://goss.fexteam.com/files/js/vue.min.js" ></script>
+<script type="text/javascript" src="http://goss.fexteam.com/files/js/vue-resource.min.js" ></script> 
+<script type="text/javascript" src="http://goss.fexteam.com/files/js/base64.js" ></script> 
+
+ <p style="color:#ffffff;font-size: 15px; width: 90%; line-height:20px;">神兽官方导航链接：抵制不良游戏，杜绝外挂，拒绝盗版游戏。文明游戏，禁止赌博！</p>
+
+</head>
+<style>
+
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #f5f5f5;
+  min-height: 100%;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+}
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+[hidden],
+template {
+  display: none;
+}
+
+a {
+  background: transparent;
+  text-decoration: none;
+  color: #333;
+}
+
+a:active {
+  outline: 0;
+}
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+dfn {
+  font-style: italic;
+}
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+img {
+  border: 0;
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+pre {
+  overflow: auto;
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  vertical-align: middle;
+}
+
+button,
+input,
+select {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+[disabled] {
+  cursor: default;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+input {
+  line-height: normal;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  box-sizing: border-box;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+legend {
+  border: 0;
+  padding: 0;
+}
+
+textarea {
+  overflow: auto;
+  resize: vertical;
+  vertical-align: top;
+}
+
+optgroup {
+  font-weight: bold;
+}
+
+input,
+select,
+textarea,
+button {
+  outline: 0;
+}
+
+textarea,
+input {
+  -webkit-user-modify: read-write-plaintext-only;
+}
+
+input::-ms-clear,
+input::-ms-reveal {
+  display: none;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: #999;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #999;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #999;
+}
+
+.placeholder {
+  color: #999;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6, p, figure, form, blockquote {
+  margin: 0;
+}
+
+ul, ol, li, dl, dd {
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol {
+  list-style: none outside none;
+}
+
+h1, h2, h3 {
+  line-height: 2;
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 18px;
+}
+
+h2 {
+  font-size: 16px;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+i {
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*{padding: 0;margin:0;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-backface-visibility: hidden;-webkit-overflow-scrolling: touch;}a {text-decoration: none;}ul {list-style: none;}input{border: none;outline:none}body{font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 微软雅黑, Arial, sans-serif;cursor: default;}
+img{border: none;}html{height: 100%;}
+
+.item{position: relative;line-height: 5vw;width: 100vw;border-bottom:1px solid #d9d9d9;font-size: 3.6vw;padding: 1vw 0;min-height: 14vw;height: auto;}
+.item .dot{float: left;width: 3vw;height:3vw;border-radius:1.5vw;margin-right: 2vw;margin-top: 3.5vw;}
+.item .time{float: left;margin-right: 2vw;}
+.item .inner{width: 64vw;margin-left: 28vw;}
+.item .green1{background:#06a98c; }
+.item .yellow1{background:#feb91d; }
+.item .green2{color:#06a98c; }
+.item .yellow2{color:#feb91d; }
+.item .bule2{color:#06a98c; }
+
+.addMore{height: 12vw;line-height: 12vw;text-align: center;}
+
+
+.load4 .loader {
+  font-size: 20px;
+ top: 40%;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  margin-left: -.5em;
+  margin-top: -.5em;
+  text-indent: -9999em;
+  -webkit-animation: load4 1.3s infinite linear;
+  animation: load4 1.3s infinite linear;
+  transform:scale(.7);
+}
+@-webkit-keyframes load4 {
+  0%,
+  100% {
+    box-shadow: 0em -3em 0em 0.2em #ffffff, 2em -2em 0 0em #ffffff, 3em 0em 0 -0.5em #ffffff, 2em 2em 0 -0.5em #ffffff, 0em 3em 0 -0.5em #ffffff, -2em 2em 0 -0.5em #ffffff, -3em 0em 0 -0.5em #ffffff, -2em -2em 0 0em #ffffff;
+  }
+  12.5% {
+    box-shadow: 0em -3em 0em 0em #ffffff, 2em -2em 0 0.2em #ffffff, 3em 0em 0 0em #ffffff, 2em 2em 0 -0.5em #ffffff, 0em 3em 0 -0.5em #ffffff, -2em 2em 0 -0.5em #ffffff, -3em 0em 0 -0.5em #ffffff, -2em -2em 0 -0.5em #ffffff;
+  }
+  25% {
+    box-shadow: 0em -3em 0em -0.5em #ffffff, 2em -2em 0 0em #ffffff, 3em 0em 0 0.2em #ffffff, 2em 2em 0 0em #ffffff, 0em 3em 0 -0.5em #ffffff, -2em 2em 0 -0.5em #ffffff, -3em 0em 0 -0.5em #ffffff, -2em -2em 0 -0.5em #ffffff;
+  }
+  37.5% {
+    box-shadow: 0em -3em 0em -0.5em #ffffff, 2em -2em 0 -0.5em #ffffff, 3em 0em 0 0em #ffffff, 2em 2em 0 0.2em #ffffff, 0em 3em 0 0em #ffffff, -2em 2em 0 -0.5em #ffffff, -3em 0em 0 -0.5em #ffffff, -2em -2em 0 -0.5em #ffffff;
+  }
+  50% {
+    box-shadow: 0em -3em 0em -0.5em #ffffff, 2em -2em 0 -0.5em #ffffff, 3em 0em 0 -0.5em #ffffff, 2em 2em 0 0em #ffffff, 0em 3em 0 0.2em #ffffff, -2em 2em 0 0em #ffffff, -3em 0em 0 -0.5em #ffffff, -2em -2em 0 -0.5em #ffffff;
+  }
+  62.5% {
+    box-shadow: 0em -3em 0em -0.5em #ffffff, 2em -2em 0 -0.5em #ffffff, 3em 0em 0 -0.5em #ffffff, 2em 2em 0 -0.5em #ffffff, 0em 3em 0 0em #ffffff, -2em 2em 0 0.2em #ffffff, -3em 0em 0 0em #ffffff, -2em -2em 0 -0.5em #ffffff;
+  }
+  75% {
+    box-shadow: 0em -3em 0em -0.5em #ffffff, 2em -2em 0 -0.5em #ffffff, 3em 0em 0 -0.5em #ffffff, 2em 2em 0 -0.5em #ffffff, 0em 3em 0 -0.5em #ffffff, -2em 2em 0 0em #ffffff, -3em 0em 0 0.2em #ffffff, -2em -2em 0 0em #ffffff;
+  }
+  87.5% {
+    box-shadow: 0em -3em 0em 0em #ffffff, 2em -2em 0 -0.5em #ffffff, 3em 0em 0 -0.5em #ffffff, 2em 2em 0 -0.5em #ffffff, 0em 3em 0 -0.5em #ffffff, -2em 2em 0 0em #ffffff, -3em 0em 0 0em #ffffff, -2em -2em 0 0.2em #ffffff;
+  }
+}
+@keyframes load4 {
+  0%,
+  100% {
+    box-shadow: 0em -3em 0em 0.2em #ffffff, 2em -2em 0 0em #ffffff, 3em 0em 0 -0.5em #ffffff, 2em 2em 0 -0.5em #ffffff, 0em 3em 0 -0.5em #ffffff, -2em 2em 0 -0.5em #ffffff, -3em 0em 0 -0.5em #ffffff, -2em -2em 0 0em #ffffff;
+  }
+  12.5% {
+    box-shadow: 0em -3em 0em 0em #ffffff, 2em -2em 0 0.2em #ffffff, 3em 0em 0 0em #ffffff, 2em 2em 0 -0.5em #ffffff, 0em 3em 0 -0.5em #ffffff, -2em 2em 0 -0.5em #ffffff, -3em 0em 0 -0.5em #ffffff, -2em -2em 0 -0.5em #ffffff;
+  }
+  25% {
+    box-shadow: 0em -3em 0em -0.5em #ffffff, 2em -2em 0 0em #ffffff, 3em 0em 0 0.2em #ffffff, 2em 2em 0 0em #ffffff, 0em 3em 0 -0.5em #ffffff, -2em 2em 0 -0.5em #ffffff, -3em 0em 0 -0.5em #ffffff, -2em -2em 0 -0.5em #ffffff;
+  }
+  37.5% {
+    box-shadow: 0em -3em 0em -0.5em #ffffff, 2em -2em 0 -0.5em #ffffff, 3em 0em 0 0em #ffffff, 2em 2em 0 0.2em #ffffff, 0em 3em 0 0em #ffffff, -2em 2em 0 -0.5em #ffffff, -3em 0em 0 -0.5em #ffffff, -2em -2em 0 -0.5em #ffffff;
+  }
+  50% {
+    box-shadow: 0em -3em 0em -0.5em #ffffff, 2em -2em 0 -0.5em #ffffff, 3em 0em 0 -0.5em #ffffff, 2em 2em 0 0em #ffffff, 0em 3em 0 0.2em #ffffff, -2em 2em 0 0em #ffffff, -3em 0em 0 -0.5em #ffffff, -2em -2em 0 -0.5em #ffffff;
+  }
+  62.5% {
+    box-shadow: 0em -3em 0em -0.5em #ffffff, 2em -2em 0 -0.5em #ffffff, 3em 0em 0 -0.5em #ffffff, 2em 2em 0 -0.5em #ffffff, 0em 3em 0 0em #ffffff, -2em 2em 0 0.2em #ffffff, -3em 0em 0 0em #ffffff, -2em -2em 0 -0.5em #ffffff;
+  }
+  75% {
+    box-shadow: 0em -3em 0em -0.5em #ffffff, 2em -2em 0 -0.5em #ffffff, 3em 0em 0 -0.5em #ffffff, 2em 2em 0 -0.5em #ffffff, 0em 3em 0 -0.5em #ffffff, -2em 2em 0 0em #ffffff, -3em 0em 0 0.2em #ffffff, -2em -2em 0 0em #ffffff;
+  }
+  87.5% {
+    box-shadow: 0em -3em 0em 0em #ffffff, 2em -2em 0 -0.5em #ffffff, 3em 0em 0 -0.5em #ffffff, 2em 2em 0 -0.5em #ffffff, 0em 3em 0 -0.5em #ffffff, -2em 2em 0 0em #ffffff, -3em 0em 0 0em #ffffff, -2em -2em 0 0.2em #ffffff;
+  }
+}
+
+.waiting{position: fixed;width:100%;height:100%;top:0;left:0;z-index: 111;} 
+.waiting .waitingBack{position: fixed;width:100%;height:100%;top:0;left:0;background: #000;opacity:.5;}
+
+.first-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    z-index: 100;
+}
+
+.first-page button {
+    border: 1px solid #ccc;
+    padding: 6px 20px;
+    border-radius: 5px;
+    margin-top: 30px;
+    background: transparent;
+    margin-bottom: 50px;
+}
+
+.first-page-text {
+    padding: 0 20px;
+}
+
+header {
+    height: 44px;
+    background: #2b2b2b;
+    color: #fff;
+    vertical-align: middle;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+
+.icon {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+header .nav-back {
+    height: 100%;
+    line-height: 44px;
+    position: relative;
+    width: 66px;
+    font-size: 16px;
+    font-weight: lighter;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+}
+
+header .icon-back {
+    height: 20px;
+    width: 20px;
+    background-image: url('http://192.168.3.66/GameCenter/img/icon/back.svg');
+}
+
+header h1 {
+    font-size: 18px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+
+header .nav-person {
+    padding-right: 8px;
+}
+
+header .icon-person {
+    width: 23px;
+    height: 21px;
+    background-image: url('http://192.168.3.66/GameCenter/img/icon/person.svg');
+    float: right;
+}
+
+main {
+   font-size: 16px;
+   background-color: #ebebeb;
+   position: fixed;
+   top: 44px;
+   bottom: 50px;
+   left: 0;
+   right: 0;
+   overflow-y: auto;
+   padding-bottom: 10px;
+}
+
+main::-webkit-scrollbar {
+    display:none
+}
+
+.message-item {
+    width: 100%;
+    display: flex;
+    margin-top: 25px;
+}
+
+.message-item .avatar{
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
+}
+
+.message-bubble {
+
+}
+
+.message-item--left {
+}
+
+.message-item--right {
+    flex-direction: row-reverse;
+}
+
+.message-bubble {
+    border: 1px solid #ddd;
+    padding: 7px 10px;
+    border-radius: 3px;
+    max-width: 275px;
+    position: relative;
+}
+
+.message-item--left .message-bubble {
+    background-color: #fff;
+}
+.message-item--left .message-bubble::before {
+    content: '';
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    position: absolute;
+    top: 14px;
+    left: -6px;
+    transform: rotate(-45deg);
+    border-radius: 0 0 20px 0;
+}
+
+.message-item--right .message-bubble {
+    /* background-color: #afe56e;
+    border-color: #7fb25a; */
+    background-color: #9fe759;
+    border-color: #87cd51;
+}
+
+.message-item--right .message-bubble::before {
+    content: '';
+    border-top: 1px solid #87cd51;
+    border-left: 1px solid #87cd51;
+    width: 10px;
+    height: 10px;
+    background-color: #9fe759;
+    position: absolute;
+    top: 14px;
+    right: -6px;
+    transform: rotate(135deg);
+    border-radius: 0 0 20px 0;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background-color: #f5f5f7;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+
+footer .icon {
+    width: 28px;
+    height: 28px;
+    margin-left: 10px;
+}
+
+footer .icon:last-child {
+    margin-right: 10px;
+}
+
+footer .text-input{
+    flex: 1;
+    margin-left: 10px;
+    height: 36px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f5f5f5;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 14px;
+}
+
+footer .icon-voice {
+    background-image: url('http://192.168.3.66/GameCenter/img/icon/voice.svg');
+}
+
+footer .icon-plus {
+    /*background-image: url('http://192.168.3.66/GameCenter/img/icon/plus-cycle.svg');*/
+}
+
+footer .icon-face{
+    background-image: url('http://192.168.3.66/GameCenter/img/icon/smile-face.svg');
+}
+
+.message-select {
+    height: 200px;
+    bottom: -200px;
+    position: fixed;
+    width: 100%;
+}
+
+.show-selector footer {
+    bottom: 200px;
+}
+
+.show-selector main {
+    bottom: 250px;
+}
+
+.show-selector .message-select {
+    bottom: 0;
+}
+
+footer, main, .message-select {
+    transition: bottom .3s;
+}
+
+.message-select {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.message-select .message-item {
+    display: flex;
+    justify-content: center;
+}
+
+/* cover-tips */
+.cover-tips {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.mask {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .3);
+    position: absolute;
+    z-index: 100;
+}
+
+.hide {
+    display: none;
+}
+
+.tips-container {
+    width: 200px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    z-index: 101;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(-10%);
+    padding: 20px;
+}
+
+.tips-text {
+    width: 100%;
+    line-height: 30px;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.tips-icons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.icon-replay, .icon-share {
+    width: 40px;
+    height: 40px;
+}
+
+.icon-replay {
+    background-image: url('http://192.168.3.66/GameCenter/img/icon/replay.svg');
+}
+
+.icon-share {
+    background-image: url('http://192.168.3.66/GameCenter/img/icon/share.svg');
+}
+
+</style>
+<body  >
+	<div id="app-main"  v-cloak>
+		<!-- <div style="position: fixed;width: 100%;height: 100%;background-color: white;z-index: 9999;" v-show="beanList.length==0&&isShowNoRecord">
+        	<img src="https://gameoss.fexteam.com/files/images/info_norecords.png" style="position: absolute;top: 20vh;left:50%;margin-left: -40vw;width: 80vw;" >
+        </div> -->
+
+        <section class="chat-page show-selector">
+
+        	<main style="top: 0px;bottom: 50px;" id="chat_record">
+        		<div class="message-list">
+        			<div class="message-item " style="margin-top: 20px;" v-if="page<totalPage&&totalPage!=0" v-on:click="dynamics">
+        				<div style="position: relative;text-align: center;width: 100vw;">点击查看历史消息</div>
+        			</div>
+
+        			<div class="message-item " v-for="record in beanList" v-bind:class="record.class_name">
+        				<div style="position: relative;text-align: center;width: 100vw;" v-if="record.mail_type==-1">
+        					<span style="background-color: rgb(206,206,206);font-size: 13px;padding: 5px;border-radius: 2px;color: white;">{{record.showTime}}</span>
+        				</div>
+        				<img class="avatar" v-bind:src="record.sender_head_img_url" v-if="record.mail_type!=-1">
+        				<div class="message-bubble" v-if="record.mail_type==1">{{record.content}}</div>
+        				<div class="message-bubble" v-if="record.mail_type==2" v-on:click="clickImage(record)">
+        					<img v-bind:src="record.image" v-bind:style="'width: ' + record.image_width +'px;max-width: 255px;min-width: 60px;'">
+        				</div>
+        			</div>
+        		</div>
+        	</main>
+
+        	<footer style="bottom: 0px;" id='chat_send_input'>
+        		<input type="text" class="text-input" v-model="sendText" placeholder="输入反馈文字" v-on:focus="sendFocus" v-on:blur="sendBlur">
+        		<i class="icon icon-plus" style="width: 50px;height: 32px;line-height: 32px;text-align: center;background-color: rgb(109, 125, 212);border-radius: 2px;font-size: 14px;color: white;" v-on:click="sendRecord">发送</i>
+        	</footer>
+
+        </section>
+
+		
+		<div class="waiting" v-show="is_operation">
+			<div class="waitingBack"></div>
+			<div class="load4">
+				<div class="loader"></div>
+			</div>
+		</div>
+
+		<div class="waiting" v-show="is_bigimg&&record!=null">
+			<div class="waitingBack" v-on:click="hiddenBigimg"></div>
+			<div style="position: absolute;top: 0vw;left: 0vw;width: 100vw;height: 100vh;overflow: scroll;" v-if="record&&record.image" v-on:click="hiddenBigimg">
+				<img v-bind:src="record.image" style="position: absolute;top: 5vw;left: 5vw;width: 90vw;" v-if="record.image">
+			</div>
+			
+		</div>
+		
+	</div>
+
+
+	<div class="imgs-box" id="img_box">
+    </div>
+
+</body>
+
+<script >
+
+
+
+var appData={
+	beanList:[],
+	pageSize:10,
+	page:0,
+	totalPage:0,
+	isShowNoRecord:false,
+	sendText:'',
+	"accountId":'36916',
+	is_operation:false,
+	is_bigimg:false,
+	record:null,
+};
+var userData = {
+	"accountId": "<?php echo $user['id']; ?>",
+	"s":'7f10020f7ac324b3cb4ec9e2d86a864e',
+	"avatar":"<?php echo $user['img']; ?>",
+	"nickname": "<?php echo $user['nickname']; ?>",
+};
+var globalData={
+	"dealerNum": '51',
+	"apiUrl":'http://boxapi.fexteam.com/'
+}
+
+
+var bfscrolltop = document.body.scrollTop;
+var interval = null;
+var isFocus = false;
+
+var methods={
+	hiddenBigimg:function(){
+		appData.is_bigimg = false;
+	},
+	clickImage:function(record){
+		appData.record = record;
+		// appData.is_bigimg = true;
+		console.log(record.image);
+
+		var obj = {
+			urls : [record.image],
+			current : record.image
+		};
+		previewImage.start(obj);
+
+	},
+	toRecordBottom:function() {
+		var divscroll=document.getElementById('chat_record');
+
+		if (divscroll) {
+			divscroll.scrollTop = divscroll.scrollHeight;
+		}
+	},
+	dynamics:function(){
+		appData.page=appData.page+1;
+		Vue.http.get(globalData.apiUrl+'user/mails?&page='+appData.page+"&pageSize="+appData.pageSize+'&aid='+userData.accountId+'&s='+userData.s+'&dn='+globalData.dealerNum).then(function(res){
+
+			appData.isShowNoRecord = true;
+        	var bodyData = res.data;
+
+            if (bodyData.result == 0) {
+
+            	var newMessages = [];
+
+            	for(var i=0;i<bodyData.data.mails.length;i++){
+            		var originTime = bodyData.data.mails[i].create_time;
+                    
+                    bodyData.data.mails[i].originTime = originTime;
+					bodyData.data.mails[i].create_time = timestampToTime(bodyData.data.mails[i].create_time);
+					bodyData.data.mails[i].sender_name = Base64.decode(bodyData.data.mails[i].sender_name);
+					bodyData.data.mails[i].content = Base64.decode(bodyData.data.mails[i].content);
+					if (bodyData.data.mails[i].sender_account_id == appData.accountId) {
+						//bodyData.data.mails[i].class_name = 'talk_recordboxme';
+						bodyData.data.mails[i].class_name = 'message-item--right';
+					} else {
+						//bodyData.data.mails[i].class_name = 'talk_recordbox';
+						bodyData.data.mails[i].class_name = 'message-item--left';
+					}
+
+					var timeMsg = {
+						showTime:bodyData.data.mails[i].create_time,
+						mail_type:-1,
+					};
+
+					if (i == 0) {
+						newMessages.push(timeMsg);
+					} else {
+						var oldIndex = i - 1;
+
+						if (bodyData.data.mails[i].originTime - bodyData.data.mails[oldIndex].originTime >= 300) {
+							newMessages.push(timeMsg);
+						}
+					}
+
+					
+					newMessages.push(bodyData.data.mails[i]);
+				}
+
+            	appData.beanList = newMessages.concat(appData.beanList); 
+
+    //             for(var i=bodyData.data.mails.length-1;i>=0;i--){
+    //             	var item = bodyData.data.mails[i];
+				// 	item.create_time = timestampToTime(item.create_time);
+				// 	item.sender_name = Base64.decode(item.sender_name);
+				// 	item.content = Base64.decode(item.content);
+				// 	if (item.sender_account_id == appData.accountId) {
+				// 		item.class_name = 'talk_recordboxme';
+				// 	} else {
+				// 		item.class_name = 'talk_recordbox';
+				// 	}
+
+				// 	appData.beanList.push(item);
+				// }
+
+				appData.totalPage = bodyData.data.totalPage;
+				appData.page = bodyData.data.page;
+
+				if (appData.page<appData.totalPage&&appData.totalPage!=0) {
+					$('#chat_record').css('top','0px');
+				} else {
+					$('#chat_record').css('top','0px');
+				}
+                
+				setTimeout(function() {
+					if (appData.page==1) {
+						methods.toRecordBottom();
+					}
+				},10);
+				
+				
+            } else {
+               console.log(res.data);
+            }
+            
+        },function(res){
+            console.log(res.data);
+        });
+	},	
+    sendRecord:function(){
+
+    	if (appData.sendText.length < 1) {
+    		alert('no text');
+    		return;
+    	}
+
+    	var content = Base64.encode(appData.sendText);
+
+    	var postData = { "dealerNum": globalData.dealerNum,"aid": userData.accountId, "s": userData.s, "dn": globalData.dealerNum.toString(),'content':content };
+        
+        appData.is_operation = true;
+
+        Vue.http.post(globalData.apiUrl + 'user/feedback', postData).then(function(response) {
+            var bodyData = response.body;
+            
+            
+            var item = {
+            	class_name:'message-item--right',
+            	sender_account_id:userData.accountId,
+            	content:appData.sendText,
+            	mail_type:1,
+            	sender_head_img_url:userData.avatar,
+            	sender_name:userData.nickname,
+            };
+
+            appData.beanList.push(item);
+
+            appData.sendText = '';
+
+            appData.is_operation = false;
+
+            // if (interval) {
+            // 	clearInterval(interval);
+            // 	document.body.scrollTop = bfscrolltop;
+            // }
+
+            setTimeout(function() {
+            	methods.toRecordBottom();
+            },200);
+
+        }, function(response) {
+            appData.is_operation = false;
+        });
+    },
+    sendFocus:function() {
+    	// alert('chat_send focus');
+    	if (isFocus) {
+    		return;
+    	}
+
+    	isFocus = true;
+        
+        // alert('chat_send focus');
+    	console.log('chat_send focus');
+
+    	interval = setInterval(function(){
+    		document.body.scrollTop = document.body.scrollHeight;
+    		isFocus = true;
+    	},100)
+    },
+    sendBlur:function() {
+    	clearInterval(interval);
+    	isFocus = false;
+    	// document.body.scrollTop = bfscrolltop;
+    },
+};
+//Vue生命周期
+var vueLife = {
+    vmCreated: function() {
+       logMessage('vmCreated');   
+       methods.dynamics();     
+    },
+    vmUpdated: function() {
+        logMessage('vmUpdated');
+    },
+    vmMounted: function() {
+
+    },
+    vmDestroyed: function() {
+        logMessage('vmDestroyed');
+    }
+};
+
+//Vue实例
+var vm = new Vue({
+    el: '#app-main',
+    data: appData,
+    methods: methods,
+    created: vueLife.vmCreated,
+    updated: vueLife.vmUpdated,
+    mounted: vueLife.vmMounted,
+    destroyed: vueLife.vmDestroyed,
+});
+
+function timestampToTime(timestamp) {
+    var date = new Date(timestamp * 1000);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    Y = date.getFullYear() + '年';
+    M = (date.getMonth()+1 < 10 ? "0"+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    D = (date.getDate() < 10 ? "0"+date.getDate() : date.getDate()) + ' ';
+    h = (date.getHours() < 10 ? "0"+date.getHours() : date.getHours())  + ':';
+    m = (date.getMinutes() < 10 ? "0"+date.getMinutes() : date.getMinutes()) + ' ';
+    s = date.getSeconds();
+    return  M+D+h+m;
+}
+
+
+function logMessage(msg){
+	console.log(msg)
+}
+
+
+</script>
+
+<script type="text/javascript" src="http://goss.fexteam.com/files/js/previewImage.js" ></script>
+
+
+</html>
+

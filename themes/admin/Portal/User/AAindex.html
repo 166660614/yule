@@ -1,0 +1,204 @@
+<html>
+ <head> 
+  <meta charset="utf-8" /> 
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+  <meta name="format-detection" content="telephone=no" /> 
+  <meta name="msapplication-tap-highlight" content="no" /> 
+  <title>{$titlexx}主页</title>
+  <link rel="stylesheet" type="text/css" href="/app/css/credits_manager.css">
+  <link rel="stylesheet" type="text/css" href="/app/plugins/mescroll/mescroll.min.css">
+  <link rel="stylesheet" href="__TMPL__Public/css/public.css" /> 
+  <link rel="stylesheet" href="__TMPL__Public/css/alert.css" /> 
+  <link rel="stylesheet" href="__TMPL__Public/css/swiper-3.4.2.min.css" />   
+  <link rel="stylesheet" type="text/css" href="__TMPL__Public/css/common/alert.css" /> 
+  <link rel="stylesheet" type="text/css" href="__TMPL__Public/css/activity.css">
+  <link rel="stylesheet" type="text/css" href="__TMPL__Public/css/index.css">
+  <link rel="stylesheet" type="text/css" href="__TMPL__Public/css/page.css">
+
+<style>
+.master {
+    position:fixed; z-index:98; top:0px; left:0px; width:100%; height:100%; background-color:rgba(0, 0, 0, 0.5);
+}
+.mycode{
+    width: 90vw; height: 280px; position: fixed; top: 50%; left: 50%; margin-top: -140px; margin-left: -45vw;
+    z-index: 99; background: #fff; border-radius: 3px;
+}
+.myclose{
+    font-size:30px; color:#ccc; height:25px; line-height:25px;float:right; padding:0vh 2vw;
+}
+.codetitle{
+    width:90vw;float:left; height:35px; line-height:35px; font-size:18px;color:#333;text-align:center; margin-top:0vh;
+}
+.J_security_code{
+    width:70vw; float:left; height:46px; line-height:46px; text-align:center;border:none;
+	border:#ccc solid 1px; margin-left:10vw; margin-top:40px; font-size:18px;
+}
+.codebtn{
+    background-color: #2ec4fc;width:70vw;margin-left:10vw; margin-top:40px;height:46px; line-height:46px;text-align:center;border:none;
+	border-radius:1vw; color:#fff; font-size:18px;
+}
+</style> 
+     <script src="__TMPL__Public/js/homepage/jq.js" type="text/javascript"></script>  
+  <script src="__TMPL__Public/js/homepage/home.js" type="text/javascript"></script>  
+  <script src="__TMPL__Public/js/swiper-3.4.2.min.js" type="text/javascript"></script> 
+    <script type="text/javascript" src="/app/js/jqNiceScroll/jquery.nicescroll.min.js"></script>
+  	<script type="text/javascript" src="/app/plugins/mescroll/mescroll.min.js"></script>
+  </head> 
+ <body style="background-color: #0e0226">
+   
+   <img class=''src="__TMPL__Public/img/activity/{$user.password}.jpg"  style="position: fixed;left: 0;right: 0;top: 0;width: 100%; height: 100%;bottom: 0;margin:auto;" /> 
+
+  <div  class="main" style="position: absolute;">
+
+<!-- 开通管理功能 -->
+   <div id="valert" class="alert" style="display: none">
+   <div class="alertBack"></div> 
+   <div class="mainPart">
+    <div class="backImg">
+     <div class="blackImg"></div>
+    </div> 
+    <div class="alertText">
+    <if condition="$user[sfgl] eq 0">
+    是否消耗50张房卡开启管理功能？
+    <else/>
+    关闭后再次开启管理功能需要消耗50张房卡，是否确定关闭？
+    </if>
+     
+    </div> 
+ 
+    <div style="">
+     <div class="buttonLeft" onclick="alertqx()">
+      取消
+     </div> 
+    <if condition="$user[sfgl] eq 0">
+        <div class="buttonRight" onclick="guanli()">
+    <else/>
+        <div class="buttonRight" onclick="guanli_no()">
+    </if>
+      确定
+     </div>
+    </div> 
+   </div>
+  </div>
+
+   <div class='head' >
+    <div class='gerenzx-top'>
+     <img class='gerenzx-yhimg' src="{$user.img}" /> 
+     <div class='gerenzx-yhid'>
+       ID:{$user.id}
+     </div>
+    </div> 
+    <div class='gerenzx-gg' >{$user.nickname}</div> 
+ 
+    <div class='roomcard'>
+     <div class='num'>{$user.fk}</div>                
+    </div><img style="position: relative;z-index: 50;height:12vw;top: 11vw; left: 57vw;" src="http://xinaimidating.oss-cn-shenzhen.aliyuncs.com/files/images/activity/roomCard.png" /></div>
+            </div>
+   </div>
+<style>
+.rcContent1 {
+    position: absolute;
+    left: 31.375vw;
+    width: 50vw;
+    height: 13.75vw;
+    line-height: 13.75vw;
+    font-size: 12pt;
+    color: rgb(234, 171, 55);
+}
+</style>
+  
+     <div class="row" onclick="location.href='/'">
+    <img src="__TMPL__Public/img/activity/zhuonuo.png" class="rcIcon" /> 
+    <img src="__TMPL__Public/img/activity/rc_icon_rightarrow.png" class="rcArrow" /> 
+    <p class="rcContent">游戏大厅</p>
+   </div> 
+  
+<div class="row" onclick="location.href='/codepay/index.php'">
+    <img src="__TMPL__Public/img/activity/rc_icon_sendredpackage.png" class="rcIcon" /> 
+    <img src="__TMPL__Public/img/activity/rc_icon_rightarrow.png" class="rcArrow" /> 
+    <p class="rcContent">会员充值房卡</p>
+  </div>
+ 
+ <!--   <div class="sendRedpackage" onclick="opnemm('fangka','fasongfk')"> -->
+   <div class="row" onclick="location.href='{:U('portal/user/fangka')}'">
+    <img src="__TMPL__Public/img/activity/rc_icon_sendredpackage.png" class="rcIcon" /> 
+    <img src="__TMPL__Public/img/activity/rc_icon_rightarrow.png" class="rcArrow" /> 
+    <p class="rcContent">发送门票</p>
+   </div> 
+  
+   <div class="row" onclick="location.href='{:U('portal/home/dashengkaifangchaxun')}'" >
+    <img src="__TMPL__Public/img/activity/youxijilu.png" class="rcIcon" /> 
+    <img src="__TMPL__Public/img/activity/rc_icon_rightarrow.png" class="rcArrow" /> 
+    <p class="rcContent">游戏记录</p>
+    </div> 
+   
+<div class="row" onclick="shoujibd1()" >
+    <img src="__TMPL__Public/img/activity/fangweima.png" class="rcIcon" /> 
+  <empty name="user.security_code">
+      </empty>  
+    <img src="__TMPL__Public/img/activity/rc_icon_rightarrow.png" class="rcArrow" /> 
+    <p class="rcContent">防伪码设置</p>
+    <notempty name="user.security_code">
+<div class="gerenzx-fksls1">{$user.security_code}</div>
+  </notempty>
+    </div>  
+   
+<div class="row" onclick="location.href='{:U('portal/user/gongnsm')}'" >
+    <img src="__TMPL__Public/img/activity/btn-report.png" class="rcIcon" /> 
+    <img src="__TMPL__Public/img/activity/rc_icon_rightarrow.png" class="rcArrow" /> 
+    <p class="rcContent">通知与反馈</p>
+    </div>
+   
+    <if condition="$user['status'] eq 1 && strtotime($user['create_time']) gt time()">
+      <div class="row" onclick="location.href='{:U('portal/home/agentlist')}'" >
+      <img src="__TMPL__Public/img/activity/rc_group.png" class="rcIcon" /> 
+      <img src="__TMPL__Public/img/activity/rc_icon_rightarrow.png" class="rcArrow" /> 
+      <p class="rcContent">成员管理</p>
+      </div> 
+    </if>
+
+   <div class="row" >
+    <img src="__TMPL__Public/img/activity/rc_group.png" class="rcIcon" /> 
+    <img src="__TMPL__Public/img/activity/rc_group_open.png" class="rcArrow grzxgl grzxgl2"  onclick="alertgl()" <if condition="$user[sfgl] eq 0">style="display: none;"</if> /> 
+    <img src="__TMPL__Public/img/activity/rc_group_close.png" class="rcArrow grzxgl grzxgl3" onclick="alertgl()"  <if condition="$user[sfgl] eq 1">style="display: none;"</if>/> 
+<!--     <p class="rcContent" id='guanlgn' onclick="guanlign()">管理功能</p>  -->
+    <p class="rcContent" >群主管理</p> 
+    
+   </div> 
+   <!-- 管理功能显示 -->
+   <div class="groupMenuDetail" <if condition="$user[sfgl] eq 1">style="display: block;"</if>>
+   <div class='jiurenyaoqinghan' onclick="location.href='{:U('portal/home/gerenzxyaoqinghan/',array('id'=>$user['id']))}'">
+    <img class='jiurenyaoqinghan-img' src="__TMPL__Public/img/activity/rc_group_invite.png"> <p class='jiuren-fuzhu-p' >邀请成员</p>
+    </div> 
+    <div class='jiurenchengyuan' onclick="location.href='{:U('portal/home/gerenzxchengyuan')}'" >
+    <img class='jiurenchengyuan-img' src="__TMPL__Public/img/activity/rc_group_member.png"> <p class='jiuren-fuzhu-p' >群组成员</p>
+    </div> 
+    <!-- <div class='jiurenkaifangchaxun' onclick="location.href='{:U('portal/home/gerenzxkafangchaxun')}'" >
+    <img class='jiurenkaifangchaxun-img' src="__TMPL__Public/img/activity/rc_room_search.png"> <p class='jiuren-fuzhu-p' >开房查询</p>
+    </div>  -->
+    
+
+
+
+<div id="validePhone1" style="display: none;"> 
+<div class="mycode"><div  onclick="alertqx4()" class="myclose">×</div> 
+<div class="codetitle">防伪码设置</div> 
+<input type="text" class='J_security_code' placeholder="输入1-6个数字,字母或汉字" name="myCode" class="codetxt" > 
+    <input onclick="alertqx4()" type="button" value="确认" class="codebtn">
+</div>
+  
+    
+
+
+
+
+
+
+ </body>
+ <script> 
+var mySwiper = new Swiper('.swiper-container', {
+  slidesPerView : 4,
+  freeMode : true
+})
+</script>
+</html>

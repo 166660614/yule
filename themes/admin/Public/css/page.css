@@ -1,0 +1,45 @@
+.background{position: fixed;top:0;left:0;width: 100%;height:100%;background: url("../images/bj1.jpg");background-size:100vw 100vh;}
+.black{position: fixed;top:0;left:0;width: 100%;height:100%;background: #fff;opacity: .2;}
+/*.backcolor{background: #291c4d;opacity: .85;position: absolute;top:0;left: 0;width:100%;height: 100%}*/
+
+
+.head{position:absolute;top:4vw;left:5vw; width:90vw;height:32vw;overflow:hidden;background:url(/skin/xxxk/bg_record_01.png) no-repeat center;background-size:100% 100%;}
+.avatar{position:absolute;top:1.5vw;left:2.5vw;width:16vw;height:16vw;background-color:#50a3fd;border-radius:4px;border-width:8px;border-color:red}
+.avatar img{position:absolute;top:2px;left:2px;width:15vw;height:15vw;border-radius:4px}
+.avatar .id{position:absolute;bottom:2px;width:100%;border-radius:4px;color:yellow;background-color:rgba(0,0,0,0.6);text-align:center;font-size:12px;}
+.name{position:absolute;top:0.7vw;left:22vw;width:56vw;height: 11vw;line-height:11vw;font-size:13pt;color:#ffffff;}
+.phone1{position: absolute;left: 22vw; bottom: 2vw;height: 6vw;}
+.phone2{position: absolute;left: 22vw; bottom: 2vw;height: 5vw;font-size: 2.2vh;color: rgb(64,112,251);}
+.roomcard{position: absolute;bottom: 3.5vw;right: 2vw;width: 25vw;height: 7vw;background-color: rgb(13,6,42);border-style: solid;border-color: orange;border-width: 0.1vh;border-radius: 20px;}
+.roomcard .num1{position: absolute;width: 100%;height: 7vw;line-height: 1.5vw;font-size: 2vh;color: #39d7ff;text-align: center;overflow: hidden;padding-left:3vw;}
+.roomcard .text{position: absolute;bottom: 0vw;overflow: hidden;}
+.row{position:relative;top: 35vw;margin-top: 2.5vw;left:5vw;width:90vw;height:13.75vw;overflow:hidden;background:url(/skin/xxxk/bg_record_01.png) no-repeat center;background-size:100% 100%; }
+
+.rcIcon{position:absolute;top: 3.188vw;left: 3.5vw;width: auto;height: 7.375vw;}
+.rcContent{position:absolute;top: 0;left: 16.375vw;width: 50vw;height: 13.75vw;color: white;font-size: 12pt;}
+
+.btnOnOff{position:absolute;top: 2.875vw;left: 72.84vw;width: 12.66vw;height: 8vw;}
+.rowGroup{position: relative;left: 5vw;top: 25vw;width: 90vw;margin-top: 0.5vw;height: 20vw;background-color: #c79628;border-radius: 3vw;}
+.rowGroup img{position: absolute;top: 2vw;left: 7.5vw;width: 10vw;height: 10vw;}
+.rowGroup .text{position: absolute;bottom: 0;width: 100%;height: 10vw;line-height: 10vw;font-size: 2vh;text-align: center;color: white;}
+.rowGroup .vline{position: absolute;top: 4vw;left: 24vw;width: 0.2vw;height: 12vw;background-color: rgb(155,142,224);}
+.groupInvite{position: absolute;left: 0vw;width: 25vw;height: 20vw;}
+.groupMember{position: absolute;left: 25vw;width: 25vw;height: 20vw;}
+
+
+.rowGame{position:relative;top: 25vw;margin-top: 2.5vw;left:0;width:100vw;height:25vw;overflow:hidden;background-color:#291c4d}
+.rowGame .item{position: absolute;width:18vw;height:25vw;text-align: center;color:#fff;opacity: 0.3}
+.rowGame .item img{position: absolute;top: 1.5vw;left: 1vw;width: 16vw;height: 16vw;}
+.rowGame .item .gamename{position: absolute;bottom: 1.5vw;width: 100%;text-align: center;font-size: 11pt;}
+.gameScoreTitle{position:relative;top: 25vw;margin-top: 0.5vw;left:0;width:100vw;height:7vw;overflow:hidden;background-color:#291c4d}
+.scoreRow{position: relative;top: 25vw;margin-top:1vw;}
+
+
+.phoneMask{position: fixed;z-index: 98;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(0,0,0,0.5);}
+.phoneFrame{position: fixed;z-index: 99;width: 80vw;max-width: 80vw; top: 50%; left: 50%;-webkit-transform:translate(-50%,-60%); background-color: #fff; text-align: center; border-radius: 8px; overflow: hidden;opacity: 1; color: white;}
+.phoneFrame .title{padding: 1vw;font-size: 4vw; line-height: 5vw; word-wrap: break-word;word-break: break-all;color: #000;background-color: white;}
+.phoneFrame .phoneRow{position: relative;height: 15vw;word-wrap: break-word;word-break: break-all;color: #000;background-color: white;border-top: solid;border-color: #e6e6e6;border-width: 0px;}
+.phoneFrame .phoneRow input{padding:0 12px 0 12px;position: absolute;left: 4vw;height: 11vw;line-height: 6.5vw;border-style: solid;border-width: 1px;border-radius: 0.5vh;border-color: #e6e6e6;font-size: 4vw;-webkit-appearance: none;}
+.phoneFrame .phoneRow .sendCode{position: absolute;top:  2.5vw;right: 4vw; width: 22vw;height: 10vw;line-height: 10vw;background-color: rgb(211,211,211);font-size: 3.5vw;border-radius: 0.5vh;color: white;}
+.phoneFrame .phoneBind{position: relative; left: 4vw;width: 72vw;line-height: 10vw; font-size: 4vw;display: flex;border-radius: 2vw;}
+.phoneFrame .phoneBind .bind{display: block;-webkit-box-flex:1;flex: 1;text-decoration: none;-webkit-tap-highlight-color:transparent;position: relative;margin-bottom: 0;color: rgb(255,255,255);border-top: solid;border-color: #e6e6e6;border-width: 0px;background-color: rgb(64,112,251);border-radius: 1vw;}

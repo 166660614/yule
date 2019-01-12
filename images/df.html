@@ -1,0 +1,2846 @@
+﻿<html ng-app="app">
+<head>
+<meta charset="utf-8" >
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<title>3848游玩</title>
+<link rel="stylesheet" href="static/css/loading_1.css">
+<link rel="stylesheet" href="static/css/alert_1.css">
+<script type="text/javascript" src="static/js/jquery-1.9.1.min_1.js"></script>
+<script type="text/javascript" src="static/js/angular.min_1.js"></script>
+<script src="static/js/jweixin-1.0.0_1.js"></script>
+<script type="text/javascript" src="static/js/fastclick.js"></script>
+<script type="text/javascript" src="static/js/jquery.marquee.min_1.js"></script>
+
+</head>
+<style>
+*{padding: 0;margin:0;}a {text-decoration: none;color: #fff;}ul {list-style: none;}input{border: none;outline:none}body{font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', 微软雅黑, Arial, sans-serif;cursor: default;}
+img{border: none;}
+.main{width: 100%;position:relative;margin:0 auto;}
+.roomCard{position: absolute;top:0;right:0;width: 26%;}
+.roomCard .img1{position: relative;float: left;z-index: 50;}
+.roomCard .img2{position: absolute;top:0;z-index: 51}
+.roomCard .num{position: relative;background: #273151;color:#fff;font-size: 3.5vw;border-radius:4vw;padding: 1vw 4vw;float: left;margin-left: -3vw;z-index: 49;}
+
+.user{position: absolute;top:0;left:0;width: 50%;}
+.user .avatar{border: 1px solid #b495d8;border-radius:5px;float: left;position: relative;z-index: 50;}
+.user .name{color: #fff;font-size: 3.5vw;border-radius:3.5vw;padding: 1vw 4vw;background:#273151;margin-left: -3vw;float: left;position: relative;z-index: 49;}
+
+.createRoom{position: fixed;width: 100%;height:100%;top:0;left:0;z-index: 108;}	
+.createRoom .createRoomBack{width: 100%;height:100%;background: #000;opacity:0.6;}
+/* top:38%;left:50%;margin-top:-24vh;margin-left: -22.5vh; */	
+.createRoom .mainPart{width: 45vh;position: absolute;top:51%;left:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);border: 3px solid #1dd0fd;
+    border-radius: 10px;
+}
+.createRoom .mainPart .createB{width: 100%;height:100%;top:0%;left:0%;position: absolute;background-color: #1dd0fd;border:1px solid #1dd0fd;border-radius:10px; opacity: 0.2}	
+.createRoom .mainPart .createTitle{position:relative;height:5.5vh;text-align: center;}	
+.createRoom .mainPart .createTitle img{position:relative;height:4vh;margin-top: 0.5vh;}	
+.createRoom .mainPart .cancelCreate{width: 5vh;height:5vh;top:-2.5vh;right:-2.5vh;position: absolute;}	
+.createRoom .mainPart .createCommit{position: relative;margin-top: 2vh;bottom: 2vh;line-height: 6vh;height: 5.7vh;font-size: 2.5vh;width: 18vh;left:50%;margin-left:-9vh;text-align: center;background:url("static/images/button2_1.png");background-size:100%;color: #fff;}	
+.createRoom .mainPart .blueBack{width: 42vh;border-radius:4px;margin:0 auto;position: relative;padding: 0 0 0.8vh 0; }
+.createRoom .mainPart .blueBack .selectPart{width:100%;margin-top:0.4vh;line-height:4.5vh;font-size:2.1vh;position: relative;color:#222;
+	/*background: url("static/images/navli-bj_1.png") no-repeat center*/;
+	background: white;
+    background-size: 100% 300%;border-radius:6px;font-family:simHei; padding:1vh 0; border:1px solid #1dd0fd;}
+.createRoom .mainPart .blueBack .selectPart .selectTitle{float: left;width:8vh;text-align: right;color:#333;font-weight: bolder;}
+.createRoom .mainPart .blueBack .selectPart .selectList{float: left; width: 34vh}
+.createRoom .mainPart .blueBack .selectPart .selectList .selectItem{float: left;position:relative;margin-left:1.8vh; }
+.createRoom .mainPart .blueBack .selectPart .selectList .selectItem .selectBox{float: left;height:2.1vh;width:2.1vh;border:1px solid #1dd0fd;border-radius:2px;margin-top:1vh;position: relative; }
+.createRoom .mainPart .blueBack .selectPart .selectList .selectItem img{position: absolute;width: 2vh;height:2vh;left: 0.05vh;top:1vh;}
+.createRoom .mainPart .blueBack .selectPart .selectList .selectItem .selectText{float: left;margin-left: 0.4vh;}
+
+.createRoom .mainPart .blueBack .selectPart .selectList .selectItem .text{float: left;margin-left: 0.5vh;}
+.createRoom .mainPart .blueBack .selectPart .selectList .selectItem select
+{
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    text-indent: 1.5vh;
+    position: relative;;
+    width: 8vh;
+    height:3.6vh;
+    left: 0.3vh;
+    top:0.5vh;
+    background-size: 100% 100%;
+    background-image: url("static/images/btnselect_1.png");
+}
+
+.bankerSelected{position: absolute;width: 8vh;height: 5.4vh;border-style: solid;border-width: 0px;border-color: #392c62;color: #653604;text-align: center;font-size: 1.8vh;overflow: hidden;}
+.bankerSelected .img{position: absolute;top: 0;left: 0;width: 7.7vh;height: 5.4vh;border-style: solid;border-width: 0.5px;border-color: #392c62;}
+.bankerUnSelected{position: absolute;width: 8vh;height: 5.4vh;border-style: solid;border-width: 0px;border-color: #e8c007;color: #000;text-align: center;font-size: 1.8vh;overflow: hidden;}
+.bankerUnSelected .img{position: absolute;top: 0;left: 0;width: 7.7vh;height: 5.4vh;border-style: solid;border-width: 0.5px;border-color: #e8c007;}
+
+.entrance{height:230vw;z-index: 1111}
+.entrance .img1-1{top:25vw;left:8.5vw;background: url("static/images/crea_bull6_1.png");}
+.entrance .img1-2{top:25vw;right:8.5vw;background: url("static/images/crea_bull9_1.png");}
+.entrance .img1-3{top:65vw;left:8.5vw;background: url("static/images/crea_bull10_1.png");}
+.entrance .img1-4{top:65vw;right:8.5vw;background: url("static/images/crea_bull12_1.png");}
+.entrance .img2{top:105vw;left:8.5vw;background: url("static/images/crea_laibull_1.png");}
+.entrance .img3{top:105vw;right:8.5vw;background: url("static/images/crea_sangong_1.png");}
+.entrance .img4{top:145vw;left:8.5vw;background: url("static/images/crea_flower_1.png");}
+.entrance .img5{top:145vw;right:8.5vw;background: url("static/images/crea_landlord_1.png");}
+.entrance .img6{top:185vw;left:8.5vw;background: url("static/images/crea_majiang_1.png");}
+.entrance .img7{top:185vw;right:8.5vw;background: url("static/images/crea_paijiu_1.png");}
+.entrance .img8{top:225vw;left:8.5vw;background: url("static/images/crea_28gang_1.png");}
+.entrance .img9{top:225vw;right:8.5vw;background: url("static/images/crea_xiaxie_1.png");}
+.entrance .img10{top:265vw;left:8.5vw;background: url("static/images/crea_dcx.png");}
+.entrance .img11{top:265vw;right:8.5vw;background: url("static/images/crea_dxbull_1.png");}
+.entrance .img{position: absolute;width: 37.2vw;height:37.2vw;background-size:37.2vw 37.2vw;border-radius:2vw;}
+
+
+/*alert*/
+.alert .mainPart .backImg{
+	background: urlhttp://images.nefans.cn//files/images/hall/navli-bj.png) no-repeat center;
+    background-size: 100% 300%;
+	border: 0.1vh solid #3e3e3e;
+}
+
+.phoneMask {
+    position: fixed;
+    z-index: 98;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+.phoneFrame {
+    position: fixed;
+    z-index: 99;
+    width: 80vw;
+    max-width: 80vw;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-60%);
+    background-color: #00233a;
+    text-align: center;
+    border-radius: 8px;
+    opacity: 1;
+    color: white;
+    border: 2px solid #1dd0fd;
+}
+.phoneFrame_ {
+	position: fixed;
+    z-index: 99;
+    width: 80vw;
+    max-width: 80vw;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-60%);
+    background-color: #00233a;
+    text-align: center;
+    border-radius: 8px;
+    opacity: 1;
+    color: white;
+   
+}
+</style>
+<body ng-controller="myCtrl" style="background: #000;" >
+<div style="position: fixed;width:100%;height:100%;top:0;left:0;background: #000" id="loading">
+	<img src="static/picture/loading_1.gif" style="top: 40%;position: absolute;left: 50%;margin-left: -45px;margin-top: -45px;" />
+</div>
+<div class="main" style="display: none;">
+
+	<div style="width: 100%;height: 100%;position: fixed;top:0;left:0;background: url(static/images/body_winter_1.jpg);background-size:100vw 100vh;"></div>
+
+
+	<div style="width:90vw;position: fixed;height:17vw;top:2vw;left:5vw;z-index:99;background: url(static/images/header-bj_1.png) no-repeat center;background-size:90vw 17vw;opacity: 0.9">
+		<div style="top:0;left:0;width: 70%;position: absolute;z-index:99; height: {{width*0.181}};">
+			<div class="circle" style="background: url(static/images/border_1.png) no-repeat center;background-size:100% 100%;width:18vw;height:18vw;padding:6px;margin-top:-1.5vw;margin-left:-1.5vw;">
+				<img ng-src="static/picture/{{userinfo.avatar}}" style="border-radius:50%;float: left;position: relative;z-index: 50;width:18vw;height:18vw;"  />
+			</div>
+			<div style="color: white;font-size: 3vw;position: absolute;z-index: 49;top:2vw;left:21vw;max-width:50vw;overflow: visible;height: 7vw;line-height: 7vw;" >{{userInfo.name}}
+			</div>
+		</div>
+		<div style="top:0;left:21vw;width: 28%;position:absolute;z-index:99;" >
+			<img style="position: relative;float: left;z-index: 50;height:7.2vw;margin-top:8.2vw;" src="static/picture/card_1.png" />
+			<div style="position: relative;color:white;font-size: 3vw;border-radius:3vw;padding: .8vw 4vw;float: left;margin-left: -2vw;z-index: 49;margin-top:9vw; background: rgba(0,0,0,0.5);" >{{userInfo.card}}张</div>	
+		</div>
+		<img src="static/picture/icon_kefu_1.png" style="    position: absolute;right: 29vw;top: 3.5vw;height: 10.5vw;width: 10.3vw;z-index: 999;"  ng-click="alertKefu()">
+		
+		<img src="static/picture/vline_1.png" style="    position: absolute;right: 26vw;top: -0.5vw;height: 15.5vw;width: 1.3vw;z-index: 999;"  >
+		<!-- <img src="static/picture/vline_1.png" style="position: absolute;right: 29vw;top:0;height: 17vw;width: 1vw;z-index: 999;" > -->
+		<img src="static/picture/icon_sendcard_1.png" style="position: absolute;right: 15vw;top: 3.5vw;height: 10.5vw;width: 10.3vw;z-index: 999;"  ng-click="gotored()">
+		<img src="static/picture/vline_1.png" style="position: absolute;right: 13vw;top: 0.5vw;height: 15.5vw;width: 1.3vw;z-index: 999;" >
+		<!-- <img src="static/picture/vline_1.png" style="position: absolute;right: 15vw;top:0;height: 17vw;width: 1vw;z-index: 999;" > -->
+		<img src="static/picture/icon_page.png" style="position: absolute;right: 3vw;top: 3.5vw;height: 10.5vw;width: 10.3vw;z-index: 999;;" ng-click="gotopage()">
+	</div>
+
+
+
+	<div class="entrance">
+		<div class="img1-1 img" ng-click="createBullx();selectChange(7,1) " ></div>
+		<div class="img1-2 img" ng-click="createBullx();selectChange(7,2) " ></div>
+		<div class="img1-3 img" ng-click="createBullx();selectChange(7,4) " ></div>
+		<div class="img1-4 img" ng-click="createBullx();selectChange(7,3) " ></div>
+		<div class="img2 img" ng-click="createLaiBull()"></div>
+		<div class="img3 img" ng-click="createSangong()"></div>
+		<div class="img4 img" ng-click="createFlower()"></div>
+		<div class="img5 img" ng-click="createLandlord()"></div>
+		<div class="img6 img" ng-click="createMajiang()"></div>
+		<div class="img7 img" ng-click="createPaijiu()"></div>
+		<div class="img8 img" ng-click="createErba()"></div>
+		<div class="img9 img" ng-click="createXiaxie()"></div>
+		<div class="img10 img" ng-click="createDcx()"></div>
+		<div class="img11 img" ng-click="createDxBull()"></div>
+	</div>
+
+ 	<div ng-show="isShowNoty" style="position: absolute;background-color: rgba(0,0,0,0.8);width: 100%;height: 7vh;line-height: 7vh;color: white;font-size: 2.5vh;overflow: hidden;z-index: 9998;">
+				<img style="position: absolute;top: 1.5vh;left: 3vw;width: 4vh;height: 4vh;" src="static/picture/laba_1.png">
+	</div>
+	<div ng-show="isShowNoty" id="marquee" style="position: absolute;top: 0;left: 12vw;background-color: rgba(0,0,0,0);width: 88vw;height: 7vh;line-height: 7vh;color: white;font-size: 2.5vh;overflow: hidden;z-index: 9999;">
+				{{notyMsg}}
+	</div>
+
+	<div class="alert" ng-show="isShowAlert">
+		<div class="alertBack"></div>
+		<div class="mainPart">
+			<div class="backImg">
+				<div class="blackImg"></div>
+			</div>
+			<div class="alertText" >{{alertText}}</div>
+			<div ng-show="alertType==1">
+				<div class="buttonMiddle" ng-click="closeAlert()">确定</div>
+			</div>			
+			<div ng-show="alertType==2">
+				<div class="buttonLeft" ng-click="home()">返回首页</div>
+				<div class="buttonRight" ng-click="createRoom()">创建房间</div>
+			</div>			
+			<div ng-show="alertType==3">
+				<div class="buttonLeft" ng-click="home()">返回首页</div>
+				<div class="buttonRight" ng-click="closeAlert()">取消</div>
+			</div>			
+			<div ng-show="alertType==4">
+				<div class="buttonLeft" ng-click="createRoom()">创建房间</div>
+				<div class="buttonRight" ng-click="sitDown()">加入游戏</div>
+			</div>
+			<div ng-show="alertType==5">
+				<div class="buttonMiddle" ng-click="getCards()">领取</div>
+			</div>				
+			<div ng-show="alertType==6">
+				<div class="buttonMiddle" ng-click="closeAlert()">确定</div>
+			</div>
+			<div ng-show="alertType==23">
+				<div class="buttonMiddle" ng-click="finishBindPhone()">确定</div>
+			</div>
+			<div ng-show="alertType==31">
+				<div class="buttonMiddle" ng-click="reloadView()">确定</div>
+			</div>			
+		</div>
+	</div>
+
+<div class="createRoom" ng-show="createInfo.isShow>0">
+	<div class="createRoomBack"></div>
+	<div class="mainPart">			
+		<div  class="createB"></div>
+		<div class="createTitle">
+			<img src="static/picture/txt_create_1.png" />
+		</div>				
+		<img src="static/picture/cancel_1.png" class="cancelCreate" ng-click="cancelCreate()" />
+		<!-- 斗牛选模式 -->
+		<div style="width: 100%; height: 4.4vh;line-height: 2.7vh;" ng-if="createInfo.isShow==1">
+			<div ng-class="{true: 'bankerSelected', false: 'bankerUnSelected'}[createInfo.bullx.banker_mode==3]" style="left: 1.35vh;" ng-click="selectBankerMode6(3)">
+				<img ng-src="static/picture/mode_{{createinfo.bullx.banker3}}.png" class="img" style="border-top-left-radius:4px;">
+				<p style="position: absolute;top: 0.4vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">牛牛</p>
+				<p style="position: absolute;top: 2.7vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">上庄</p>
+			</div>
+			<div ng-class="{true: 'bankerSelected', false: 'bankerUnSelected'}[createInfo.bullx.banker_mode==5]" style="left: 9.9vh;" ng-click="selectBankerMode6(5)">
+				<img ng-src="static/picture/mode_{{createinfo.bullx.banker5}}.png" class="img">
+				<p style="position: absolute;top: 0.4vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">固定</p>
+				<p style="position: absolute;top: 2.7vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">庄家</p>
+			</div>
+			<div ng-class="{true: 'bankerSelected', false: 'bankerUnSelected'}[createInfo.bullx.banker_mode==1]" style="left: 18.45vh;" ng-click="selectBankerMode6(1)">
+				<img ng-src="static/picture/mode_{{createinfo.bullx.banker1}}.png" class="img">
+				<p style="position: absolute;top: 0.4vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">自由</p>
+				<p style="position: absolute;top: 2.7vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">抢庄</p>
+			</div>
+			<div ng-class="{true: 'bankerSelected', false: 'bankerUnSelected'}[createInfo.bullx.banker_mode==2]" style="left: 27vh;" ng-click="selectBankerMode6(2)">
+				<img ng-src="static/picture/mode_{{createinfo.bullx.banker2}}.png" class="img">
+				<p style="position: absolute;top: 0.4vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">明牌</p>
+				<p style="position: absolute;top: 2.7vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">抢庄</p>
+			</div>
+			<div ng-class="{true: 'bankerSelected', false: 'bankerUnSelected'}[createInfo.bullx.banker_mode==4]" style="left: 35.55vh;" ng-click="selectBankerMode6(4)">
+				<img ng-src="static/picture/mode_{{createinfo.bullx.banker4}}.png" class="img" style="border-top-right-radius:4px;">
+				<p style="position: absolute;top: 0.4vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">通比</p>
+				<p style="position: absolute;top: 2.7vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">牛牛</p>
+			</div>
+		</div>
+
+		<!-- 三公选模式 -->
+		<div style="width: 100%; height: 5.4vh;line-height: 2.7vh;" ng-if="createInfo.isShow==5">
+			<div ng-class="{true: 'bankerSelected', false: 'bankerUnSelected'}[createInfo.sangong.banker_mode==1]" style="left: 1.35vh;" ng-click="selectBankerModeSangong(1)">
+				<img ng-src="static/picture/mode_{{createinfo.sangong.banker1}}.png" class="img" style="border-top-left-radius:4px;">
+				<p style="position: absolute;top: 0.4vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">自由</p>
+				<p style="position: absolute;top: 2.7vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">抢庄</p>
+			</div>
+			<div ng-class="{true: 'bankerSelected', false: 'bankerUnSelected'}[createInfo.sangong.banker_mode==4]" style="left: 9.9vh;" ng-click="selectBankerModeSangong(4)">
+				<img ng-src="static/picture/mode_{{createinfo.sangong.banker4}}.png" class="img">
+				<p style="position: absolute;top: 0.4vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">经典</p>
+				<p style="position: absolute;top: 2.7vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">三公</p>
+			</div>
+			<div ng-class="{true: 'bankerSelected', false: 'bankerUnSelected'}[createInfo.sangong.banker_mode==2]" style="left: 18.45vh;" ng-click="selectBankerModeSangong(2)">
+				<img ng-src="static/picture/mode_{{createinfo.sangong.banker2}}.png" class="img" style="border-top-right-radius:4px;">
+				<p style="position: absolute;top: 0.4vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">明牌</p>
+				<p style="position: absolute;top: 2.7vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">抢庄</p>
+			</div>
+		</div>
+		<!-- 二八杠选模式 -->
+		<div style="width: 100%; height: 5.4vh;line-height: 2.7vh;" ng-if="createInfo.isShow==6">
+			<div ng-class="{true: 'bankerSelected', false: 'bankerUnSelected'}[createInfo.erbagang.banker_mode==1]" style="left: 1.35vh;" ng-click="selectBankerModeErbagang(1)">
+				<img ng-src="static/picture/mode_{{createinfo.erbagang.banker1}}.png" class="img" style="border-top-left-radius:4px;">
+				<p style="position: absolute;top: 0.4vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">自由</p>
+				<p style="position: absolute;top: 2.7vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">抢庄</p>
+			</div>
+			<div ng-class="{true: 'bankerSelected', false: 'bankerUnSelected'}[createInfo.erbagang.banker_mode==2]" style="left: 9.9vh;" ng-click="selectBankerModeErbagang(2)">
+				<img ng-src="static/picture/mode_{{createinfo.erbagang.banker2}}.png" class="img" style="border-top-right-radius:4px;">
+				<p style="position: absolute;top: 0.4vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">固定</p>
+				<p style="position: absolute;top: 2.7vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">庄家</p>
+			</div>
+		</div>
+
+		<!-- 牌九选模式 -->
+		<div style="width: 100%; height: 5.4vh;line-height: 2.7vh;" ng-if="createInfo.isShow==10">
+		    <div ng-class="{true: 'bankerSelected', false: 'bankerUnSelected'}[createInfo.paijiu.banker_mode==2]" style="left: 1.35vh;" ng-click="selectBankerModePaijiu(2)">
+		        <img ng-src="static/picture/mode_{{createinfo.paijiu.banker2}}.png" class="img" style="border-top-left-radius:4px;">
+		        <p style="position: absolute;top: 0.4vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">明牌</p>
+		        <p style="position: absolute;top: 2.7vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">抢庄</p>
+		    </div>
+		    <div ng-class="{true: 'bankerSelected', false: 'bankerUnSelected'}[createInfo.paijiu.banker_mode==1]" style="left: 9.9vh;" ng-click="selectBankerModePaijiu(1)">
+		        <img ng-src="static/picture/mode_{{createinfo.paijiu.banker1}}.png" class="img" style="border-top-right-radius:4px;">
+		        <p style="position: absolute;top: 0.4vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">自由</p>
+		        <p style="position: absolute;top: 2.7vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">抢庄</p>
+		    </div>
+		</div>
+
+		<!-- 赖子牛牛选模式 -->
+		<div style="width: 100%; height: 5.4vh;line-height: 2.7vh;" ng-if="createInfo.isShow==14">
+			<div ng-class="{true: 'bankerSelected', false: 'bankerUnSelected'}[createInfo.laibull.banker_mode==1]" style="left: 1.35vh;" ng-click="selectBankerModeLaibull(1)">
+				<img ng-src="static/picture/mode_{{createinfo.laibull.banker1}}.png" class="img" style="border-top-left-radius:4px;">
+				<p style="position: absolute;top: 0.4vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">自由</p>
+				<p style="position: absolute;top: 2.7vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">抢庄</p>
+			</div>
+			<div ng-class="{true: 'bankerSelected', false: 'bankerUnSelected'}[createInfo.laibull.banker_mode==2]" style="left: 9.9vh;" ng-click="selectBankerModeLaibull(2)">
+				<img ng-src="static/picture/mode_{{createinfo.laibull.banker2}}.png" class="img" style="border-top-right-radius:4px;">
+				<p style="position: absolute;top: 0.4vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">明牌</p>
+				<p style="position: absolute;top: 2.7vh;left: 0; width: 100%;height: 2.7vh;text-align: center;">抢庄</p>
+			</div>
+		</div>
+
+		<div class="blueBack">
+			<div class="selectPart" style="top: 0px;height:4vh;padding: 0 0;border:0px;background: none">
+				<div class="selectTitle" style="top: 0;left: 0;width: 100%;height: 100%;font-size: 2vh; text-align: center;color: white;opacity: 1.0">
+				    创建房间,游戏未进行,不消耗房卡
+				</div>
+			</div>
+			<!-- 斗牛 -->
+			<div ng-if="createInfo.isShow==1">
+				<!-- <div class="selectPart" style="height:5vh;">
+					<div class="selectTitle">人数：</div>
+					<div class="selectList">
+						<div class="selectItem" style="margin-left: 1.5vh" ng-click="selectChange(7,1)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.max_count_type==1" />
+							<div class="selectText" >6人</div>
+						</div>							
+						<div class="selectItem" style="margin-left: 1.5vh" ng-click="selectChange(7,2)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.max_count_type==2" />
+							<div class="selectText" >9人</div>
+						</div>
+						<div class="selectItem" style="margin-left: 1.5vh" ng-click="selectChange(7,4)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.max_count_type==4" />
+							<div class="selectText" >10人</div>
+						</div>							
+						<div class="selectItem" style="margin-left: 1.5vh" ng-click="selectChange(7,3)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.max_count_type==3" />
+							<div class="selectText" >12人</div>
+						</div>
+					</div>
+				</div> -->
+				<div class="selectPart" style="height:4vh;">
+					<div class="selectTitle">底分：</div>
+					<div class="selectList" >
+						<div class="selectItem" ng-click="selectChange(1,1)" >
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.score_type==1"/>
+							<div class="selectText">1</div>
+						</div>							
+						<div class="selectItem" ng-click="selectChange(1,2)" >
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.score_type==2"/>
+							<div class="selectText">2</div>
+						</div>							
+						<div class="selectItem" ng-click="selectChange(1,3)" >
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.score_type==3" />
+							<div class="selectText">3</div>
+						</div>
+						<div class="selectItem" ng-click="selectChange(1,4)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.score_type==4" />
+							<div class="selectText">4</div>
+						</div>
+						<div class="selectItem" ng-click="selectChange(1,5)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.score_type==5" />
+							<div class="selectText">5</div>
+						</div>
+					</div>
+				</div>
+				<div class="selectPart" style="height:8vh;">
+				    <div class="selectTitle">下注：</div>
+				    <div class="selectList">
+				        <div class="selectItem"  ng-click="selectChange(6,1)">
+				            <div class="selectBox" ></div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.bullx.bet_type==1" />
+				            <div class="selectText" >1/2/4/5倍</div>
+				        </div>                          
+				        <div class="selectItem"  ng-click="selectChange(6,2)">
+				            <div class="selectBox" ></div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.bullx.bet_type==2" />
+				            <div class="selectText" >1/3/5/8倍</div>
+				        </div>
+				        <div class="selectItem"  ng-click="selectChange(6,3)">
+				            <div class="selectBox" ></div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.bullx.bet_type==3" />
+				            <div class="selectText" >2/4/6/10倍</div>
+				        </div>
+				    </div>
+				</div>  
+				<div class="selectPart" style="height:8vh;">
+					<div class="selectTitle">规则：</div>
+					<div class="selectList">
+						<div class="selectItem"  ng-click="selectChange(2,1)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.rule_type==1" />
+							<div class="selectText" >牛牛x3牛九x2牛八x2</div>
+						</div>							
+						<div class="selectItem"  ng-click="selectChange(2,2)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.rule_type==2" />
+							<div class="selectText" >牛牛x4牛九x3牛八x2牛七x2</div>
+						</div>
+					</div>
+				</div>	
+				<div class="selectPart" style="height:16vh;line-height:4.2vh;">
+					<div class="selectTitle">牌型：</div>
+					<div class="selectList">
+					    <div class="selectItem"  ng-click="selectChange(3,1)">
+					        <div class="selectBox" ></div>
+					        <img src="static/picture/tick_1.png" ng-show="createInfo.bullx.is_cardfour==1" />
+					        <div class="selectText" >四花牛(4倍)</div>
+					    </div>
+					    <div class="selectItem"  ng-click="selectChange(3,2)">
+					        <div class="selectBox" ></div>
+					        <img src="static/picture/tick_1.png" ng-show="createInfo.bullx.is_cardfive==1" />
+					        <div class="selectText" >五花牛(5倍)</div>
+					    </div>
+					    <div class="selectItem"  ng-click="selectChange(3,3)">
+					        <div class="selectBox" ></div>
+					        <img src="static/picture/tick_1.png" ng-show="createInfo.bullx.is_straight==1" />
+					        <div class="selectText" >顺子牛(6倍)</div>
+					    </div>
+					    <div class="selectItem"  ng-click="selectChange(3,4)">
+					        <div class="selectBox" ></div>
+					        <img src="static/picture/tick_1.png" ng-show="createInfo.bullx.is_flush==1" />
+					        <div class="selectText" >同花牛(6倍)</div>
+					    </div>
+					    <div class="selectItem"  ng-click="selectChange(3,5)">
+					        <div class="selectBox" ></div>
+					        <img src="static/picture/tick_1.png" ng-show="createInfo.bullx.is_calabash==1" />
+					        <div class="selectText" >葫芦牛(6倍)</div>
+					    </div>
+					    <div class="selectItem"  ng-click="selectChange(3,6)">
+					        <div class="selectBox" ></div>
+					        <img src="static/picture/tick_1.png" ng-show="createInfo.bullx.is_cardbomb==1" />
+					        <div class="selectText" >炸弹牛(8倍)</div>
+					    </div>
+					    <div class="selectItem"  ng-click="selectChange(3,7)">
+					        <div class="selectBox" ></div>
+					        <img src="static/picture/tick_1.png" ng-show="createInfo.bullx.is_sequence==1" />
+					        <div class="selectText" >同花顺(9倍)</div>
+					    </div>              
+					    <div class="selectItem"  ng-click="selectChange(3,8)">
+					        <div class="selectBox" ></div>
+					        <img src="static/picture/tick_1.png" ng-show="createInfo.bullx.is_cardtiny==1" />
+					        <div class="selectText" >五小牛(10倍)</div>
+					    </div>
+					</div>
+				</div>	
+				<div class="selectPart" style="height:4vh;">
+					<div class="selectTitle">局数：</div>
+					<div class="selectList">
+						<div class="selectItem"  ng-click="selectChange(4,1)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.ticket_type==1" />
+							<div class="selectText" ng-show="createInfo.bullx.max_count_type==1">10局X1房卡</div>
+							<div class="selectText" ng-show="createInfo.bullx.max_count_type==2">12局X2房卡</div>
+							<div class="selectText" ng-show="createInfo.bullx.max_count_type==3">12局X3房卡</div>
+							<div class="selectText" ng-show="createInfo.bullx.max_count_type==4">12局X2房卡</div>
+						</div>							
+						<div class="selectItem"  ng-click="selectChange(4,2)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.ticket_type==2" />
+							<div class="selectText" ng-show="createInfo.bullx.max_count_type==1">20局X2房卡</div>
+							<div class="selectText" ng-show="createInfo.bullx.max_count_type==2">24局X4房卡</div>
+							<div class="selectText" ng-show="createInfo.bullx.max_count_type==3">24局X6房卡</div>
+							<div class="selectText" ng-show="createInfo.bullx.max_count_type==4">24局X4房卡</div>
+						</div>
+					</div>
+				</div>
+				<div class="selectPart" style="height:4vh;" ng-if="createInfo.bullx.banker_mode==5">
+					<div class="selectTitle">上庄：</div>
+					<div class="selectList">
+						<div class="selectItem"  ng-click="selectChange(5,1)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.banker_score==1" />
+							<div class="selectText" >无</div>
+						</div>							
+						<div class="selectItem" style="margin-left: 1.5vh" ng-click="selectChange(5,2)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.banker_score==2" />
+							<div class="selectText" >300</div>
+						</div>
+						<div class="selectItem" style="margin-left: 1.5vh" ng-click="selectChange(5,3)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.banker_score==3" />
+							<div class="selectText" >500</div>
+						</div>
+						<div class="selectItem" style="margin-left: 1.5vh" ng-click="selectChange(5,4)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.bullx.banker_score==4" />
+							<div class="selectText" >1000</div>
+						</div>
+					</div>
+				</div>
+				<div class="selectPart" style="height:9vh;line-height:4.5vh ">
+				    <div class="selectTitle">时间：</div>
+				    <div class="selectList">                        
+				        <div class="selectItem"  >
+				            <div class="text" style="float: left;">准备</div>
+				            <select ng-model="createInfo.bullx.ready_time">
+				                <option value="5">5秒</option>
+				                <option value="6">6秒</option>
+				                <option value="7">7秒</option>
+				                <option value="8">8秒</option>
+				                <option value="9">9秒</option>
+				                <option value="10">10秒</option>
+				            </select>
+				        </div>
+				        <div class="selectItem"  style="margin-left: 1vh;">
+				            <div class="text" style="float: left;">抢庄</div>
+				            <select ng-model="createInfo.bullx.grab_time">
+				                <option value="5">5秒</option>
+				                <option value="6">6秒</option>
+				                <option value="7">7秒</option>
+				                <option value="8">8秒</option>
+				                <option value="9">9秒</option>
+				                <option value="10">10秒</option>
+				            </select>
+				        </div>
+				    </div>  
+				    <div class="selectList" style="margin-left: 8vh;margin-top: .4vh">
+				        <div class="selectItem"  >
+				            <div class="text" style="float: left;">下注</div>
+				            <select ng-model="createInfo.bullx.bet_time   ">
+				                <option value="5">5秒</option>
+				                <option value="6">6秒</option>
+				                <option value="7">7秒</option>
+				                <option value="8">8秒</option>
+				                <option value="9">9秒</option>
+				                <option value="10">10秒</option>
+				            </select>
+				        </div>
+				        <div class="selectItem" style="margin-left: 1vh;">
+				            <div class="text" style="float: left;">摊牌</div>
+				            <select ng-model="createInfo.bullx.show_time">
+				                <option value="5">5秒</option>
+				                <option value="6">6秒</option>
+				                <option value="7">7秒</option>
+				                <option value="8">8秒</option>
+				                <option value="9">9秒</option>
+				                <option value="10">10秒</option>
+				            </select>
+				        </div>
+				    </div>
+				</div>
+
+			</div>
+
+			<!-- 炸金花 -->
+			<div ng-if="createInfo.isShow==4">
+				<div class="selectPart" style="height:5vh;">
+					<div class="selectTitle">人数：</div>
+					<div class="selectList">
+						<div class="selectItem"  ng-click="selectChange(1,1)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.flower.max_count_type==1" />
+							<div class="selectText" >6人房间</div>
+						</div>							
+						<div class="selectItem"  ng-click="selectChange(1,2)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.flower.max_count_type==2" />
+							<div class="selectText" >9人房间</div>
+						</div>
+					</div>
+				</div>
+				<div class="selectPart" style="height:8vh;">
+				    <div class="selectTitle">底分：</div>
+				    <div class="selectList">
+				        <div class="selectItem"  ng-click="selectChange(2,4)">
+				            <div class="selectBox" ></div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.default_score==4" />
+				            <div class="selectText" >4分</div>
+				        </div>                          
+				        <div class="selectItem" style="margin-left: 1.5vh;" ng-click="selectChange(2,8)">
+				            <div class="selectBox" > </div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.default_score==8" />
+				            <div class="selectText">8分</div>
+				        </div>
+				        <div class="selectItem" style="margin-left: 1.5vh;" ng-click="selectChange(2,10)">
+				            <div class="selectBox" > </div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.default_score==10" />
+				            <div class="selectText">10分</div>
+				        </div>
+				        <div class="selectItem" style="margin-left: 1.5vh;" ng-click="selectChange(2,16)">
+				            <div class="selectBox" > </div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.default_score==16" />
+				            <div class="selectText">16分</div>
+				        </div>
+				        <div class="selectItem" style="margin-left: 1.5vh;" ng-click="selectChange(2,20)">
+				            <div class="selectBox" > </div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.default_score==20" />
+				            <div class="selectText">20分</div>
+				        </div>
+				        <div class="selectItem" style="margin-left: 1.5vh;" ng-click="selectChange(2,40)">
+				            <div class="selectBox" > </div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.default_score==40" />
+				            <div class="selectText">40分</div>
+				        </div>
+				    </div>
+				</div>
+				<div class="selectPart" style="height:9vh;">
+					<div class="selectTitle">筹码：</div>
+					<div class="selectList" >
+						<div class="selectItem"  ng-click="selectChange(3,1)">
+							<div class="selectBox"></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.flower.chip_type==1"/>
+							<div class="selectText" >2/4,4/8,8/16,10/20</div>
+						</div>							
+						<div class="selectItem" ng-click="selectChange(3,2)" >
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.flower.chip_type==2"/>
+							<div class="selectText" >2/4,5/10,10/20,20/40</div>
+						</div>							
+					</div>
+				</div>
+				<div class="selectPart" style="height:8vh;">
+				    <div class="selectTitle">规则：</div>
+				    <div class="selectList">
+				        <div class="selectItem" ng-click="selectChange(4,1)">
+				            <div class="selectBox" ></div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.disable_look==1" />
+				            <div class="selectText" >首轮禁止看牌</div>
+				        </div>                          
+				        <div class="selectItem"  ng-click="selectChange(4,2)">
+				            <div class="selectBox" ></div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.disable_pk==1" />
+				            <div class="selectText" >闷牌，全场禁止比牌</div>
+				        </div>
+				    </div>
+				</div>
+
+				<div class="selectPart" style="height:4vh;">
+				    <div class="selectTitle">上限：</div>
+				    <div class="selectList">
+				        <div class="selectItem"  ng-click="selectChange(5,0)">
+				            <div class="selectBox" ></div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.upper_limit==0" />
+				            <div class="selectText" >无</div>
+				        </div>                          
+				        <div class="selectItem" style="margin-left: 1.5vh;" ng-click="selectChange(5,500)">
+				            <div class="selectBox" > </div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.upper_limit==500" />
+				            <div class="selectText">500</div>
+				        </div>
+				        <div class="selectItem" style="margin-left: 1.5vh;" ng-click="selectChange(5,1000)">
+				            <div class="selectBox" > </div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.upper_limit==1000" />
+				            <div class="selectText">1000</div>
+				        </div>
+				        <div class="selectItem" style="margin-left: 1.5vh;" ng-click="selectChange(5,2000)">
+				            <div class="selectBox" > </div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.upper_limit==2000" />
+				            <div class="selectText">2000</div>
+				        </div>
+				    </div>
+				</div>
+
+				<div class="selectPart" style="height:4vh;">
+				    <div class="selectTitle">比牌：</div>
+				    <div class="selectList">
+				        <div class="selectItem"  ng-click="selectChange(6,0)">
+				            <div class="selectBox" ></div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.pk_score==0" />
+				            <div class="selectText" >0</div>
+				        </div>                          
+				        <div class="selectItem" style="margin-left: 1.5vh;" ng-click="selectChange(6,100)">
+				            <div class="selectBox" > </div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.pk_score==100" />
+				            <div class="selectText">100</div>
+				        </div>
+				        <div class="selectItem" style="margin-left: 1.5vh;" ng-click="selectChange(6,300)">
+				            <div class="selectBox" > </div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.pk_score==300" />
+				            <div class="selectText">300</div>
+				        </div>
+				        <div class="selectItem" style="margin-left: 1.5vh;" ng-click="selectChange(6,500)">
+				            <div class="selectBox" > </div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.pk_score==500" />
+				            <div class="selectText">500</div>
+				        </div>
+				    </div>
+				</div>
+				<div class="selectPart" style="height:4vh;">
+				    <div class="selectTitle">看牌：</div>
+				    <div class="selectList">
+				        <div class="selectItem"  ng-click="selectChange(7,0)">
+				            <div class="selectBox" ></div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.look_score==0" />
+				            <div class="selectText" >0</div>
+				        </div>                          
+				        <div class="selectItem" style="margin-left: 1.5vh;" ng-click="selectChange(7,100)">
+				            <div class="selectBox" > </div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.look_score==100" />
+				            <div class="selectText">100</div>
+				        </div>
+				        <div class="selectItem" style="margin-left: 1.5vh;" ng-click="selectChange(7,300)">
+				            <div class="selectBox" > </div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.look_score==300" />
+				            <div class="selectText">300</div>
+				        </div>
+				        <div class="selectItem" style="margin-left: 1.5vh;" ng-click="selectChange(7,500)">
+				            <div class="selectBox" > </div>
+				            <img src="static/picture/tick_1.png" ng-show="createInfo.flower.look_score==500" />
+				            <div class="selectText">500</div>
+				        </div>
+				    </div>
+				</div>
+
+				<div class="selectPart" style="height:9vh;">
+					<div class="selectTitle">局数：</div>
+					<div class="selectList">
+						<div class="selectItem"  ng-click="selectChange(8,1)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.flower.ticket_type==1" />
+							<div class="selectText" ng-show="createInfo.flower.max_count_type==1">10局X1张房卡</div>
+							<div class="selectText" ng-show="createInfo.flower.max_count_type==2">12局X2张房卡</div>
+						</div>							
+						<div class="selectItem"  ng-click="selectChange(8,2)">
+							<div class="selectBox" > </div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.flower.ticket_type==2" />
+							<div class="selectText" ng-show="createInfo.flower.max_count_type==1">20局X2张房卡</div>
+							<div class="selectText" ng-show="createInfo.flower.max_count_type==2">24局X4张房卡</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<!-- 三公 -->
+			<div class="bullRull" ng-if="createInfo.isShow==5">	
+
+				<div class="selectPart" style="height:5vh;">
+					<div class="selectTitle">人数：</div>
+					<div class="selectList">
+						<div class="selectItem"  ng-click="selectChange(2,1)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.sangong.max_count_type==1" />
+							<div class="selectText" >6人房间</div>
+						</div>							
+						<div class="selectItem"  ng-click="selectChange(2,2)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.sangong.max_count_type==2" />
+							<div class="selectText" >9人房间</div>
+						</div>
+					</div>
+				</div>	
+				<div class="selectPart" style="height:7.5vh;">
+					<div class="selectTitle">底分：</div>
+					<div class="selectList" >
+						<div class="selectItem" ng-click="selectChange(1,1)" >
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.sangong.score_type==1"/>
+							<div class="selectText">1分</div>
+						</div>							
+						<div class="selectItem" ng-click="selectChange(1,2)" >
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.sangong.score_type==2"/>
+							<div class="selectText">2分</div>
+						</div>							
+						<div class="selectItem" ng-click="selectChange(1,3)" >
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.sangong.score_type==3" />
+							<div class="selectText">3分</div>
+						</div>
+						<div class="selectItem" ng-click="selectChange(1,4)" >
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.sangong.score_type==4" />
+							<div class="selectText">4分</div>
+						</div>
+						<div class="selectItem" ng-click="selectChange(1,5)" >
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.sangong.score_type==5" />
+							<div class="selectText">5分</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="selectPart" style="height:9vh;">
+					<div class="selectTitle">牌型：</div>
+					<div class="selectList">
+						<div class="selectItem"  ng-click="selectChange(3,1)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.sangong.is_cardjoker==1" />
+							<div class="selectText" >天公x10,雷公x7,地公x5</div>
+						</div>
+						<div class="selectItem"  ng-click="selectChange(3,2)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.sangong.is_cardbao9==1" />
+							<div class="selectText" >暴玖x9</div>
+						</div>				
+						
+					</div>
+				</div>	
+				<div class="selectPart" style="height:4.5vh;">
+					<div class="selectTitle">局数：</div>
+					<div class="selectList">
+						<div class="selectItem"  ng-click="selectChange(4,1)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.sangong.ticket_type==1" />
+							<div class="selectText" ng-show="createInfo.sangong.max_count_type==1">10局X1房卡</div>
+							<div class="selectText" ng-show="createInfo.sangong.max_count_type==2">12局X2房卡</div>
+						</div>							
+						<div class="selectItem"  ng-click="selectChange(4,2)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.sangong.ticket_type==2" />
+							<div class="selectText" ng-show="createInfo.sangong.max_count_type==1">20局X2房卡</div>
+							<div class="selectText" ng-show="createInfo.sangong.max_count_type==2">24局X4房卡</div>
+						</div>
+					</div>
+				</div>
+				<div class="selectPart" style="height:4.5vh;" ng-if="createInfo.sangong.banker_mode==5">
+					<div class="selectTitle">上庄：</div>
+					<div class="selectList">
+						<div class="selectItem"  ng-click="selectChange(5,1)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.sangong.banker_score==1" />
+							<div class="selectText" >无</div>
+						</div>							
+						<div class="selectItem" style="margin-left: 1.5vh" ng-click="selectChange(5,2)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.sangong.banker_score==2" />
+							<div class="selectText" ng-show="createInfo.sangong.max_count_type==1">100</div>
+							<div class="selectText" ng-show="createInfo.sangong.max_count_type==2">300</div>
+						</div>
+						<div class="selectItem" style="margin-left: 1.5vh" ng-click="selectChange(5,3)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.sangong.banker_score==3" />
+							<div class="selectText" ng-show="createInfo.sangong.max_count_type==1">300</div>
+							<div class="selectText" ng-show="createInfo.sangong.max_count_type==2">500</div>
+						</div>
+						<div class="selectItem" style="margin-left: 1.5vh" ng-click="selectChange(5,4)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.sangong.banker_score==4" />
+							<div class="selectText" ng-show="createInfo.sangong.max_count_type==1">500</div>
+							<div class="selectText" ng-show="createInfo.sangong.max_count_type==2">1000</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- 二八杠 -->
+			<div ng-if="createInfo.isShow==6">	
+				<div class="selectPart" style="height:9vh;" ng-if="createInfo.erbagang.banker_mode==2">
+					<div class="selectTitle">上庄：</div>
+					<div class="selectList">
+						<div class="selectItem"  ng-click="selectChange(1,1)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.erbagang.score_type==1" />
+							<div class="selectText" >500分</div>
+						</div>							
+						<div class="selectItem" style="margin-left: 1.5vh" ng-click="selectChange(1,2)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.erbagang.score_type==2" />
+							<div class="selectText" >1000分</div>
+						</div>
+						<div class="selectItem" style="margin-left: 1.5vh" ng-click="selectChange(1,3)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.erbagang.score_type==3" />
+							<div class="selectText" >1500分</div>
+						</div>
+						<div class="selectItem" style="margin-left: 1.5vh" ng-click="selectChange(1,4)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.erbagang.score_type==4" />
+							<div class="selectText" >无限制</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="selectPart" style="height:9vh;"  ng-if="createInfo.erbagang.banker_mode==1">
+					<div class="selectTitle">筹码：</div>
+					<div class="selectList" >
+						<div class="selectItem"  ng-click="selectChange(2,0)">
+							<div class="selectBox"></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.erbagang.chip_type==0"/>
+							<div class="selectText" >5,10,20,30</div>
+						</div>							
+						<div class="selectItem"  ng-click="selectChange(2,1)">
+							<div class="selectBox"></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.erbagang.chip_type==1"/>
+							<div class="selectText" >10,20,30,50</div>
+						</div>							
+						<div class="selectItem" ng-click="selectChange(2,2)" >
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.erbagang.chip_type==2"/>
+							<div class="selectText" >20,30,50,80</div>
+						</div>	
+						<div class="selectItem" ng-click="selectChange(2,3)" >
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.erbagang.chip_type==3"/>
+							<div class="selectText" >30,50,80,100</div>
+						</div>						
+					</div>
+				</div>
+
+				<div class="selectPart" style="height:9vh;">
+					<div class="selectTitle">规则：</div>
+					<div class="selectList">
+						<div class="selectItem"  ng-click="selectChange(3,1)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.erbagang.rule_type==1" />
+							<div class="selectText" >无二八杠</div>
+						</div>							
+						<div class="selectItem"  ng-click="selectChange(3,2)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.erbagang.rule_type==2" />
+							<div class="selectText" >二八杠2倍</div>
+						</div>
+						<div class="selectItem"  ng-click="selectChange(3,3)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.erbagang.rule_type==3" />
+							<div class="selectText" >二八杠3倍</div>
+						</div>
+					</div>
+				</div>	
+			
+				<div class="selectPart" style="height:4.5vh;">
+					<div class="selectTitle">局数：</div>
+					<div class="selectList">
+						<div class="selectItem"  ng-click="selectChange(4,1)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.erbagang.ticket_count==1" />
+							<div class="selectText" >4局X1房卡</div>
+						</div>							
+						<div class="selectItem"  ng-click="selectChange(4,2)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.erbagang.ticket_count==2" />
+							<div class="selectText" >8局X2房卡</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 斗地主 -->
+			<div ng-if="createInfo.isShow==7">			
+				<div class="selectPart" style="height:4.5vh;">
+					<div class="selectTitle">底分：</div>
+					<div class="selectList" >
+					    <div class="selectItem" ng-click="selectChange(1,1)" >
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.landlord.base_score==1"/>
+							<div class="selectText">1分</div>
+						</div>						
+						<div class="selectItem" ng-click="selectChange(1,5)" >
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.landlord.base_score==5"/>
+							<div class="selectText">5分</div>
+						</div>							
+						<div class="selectItem" ng-click="selectChange(1,10)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.landlord.base_score==10" />
+							<div class="selectText">10分</div>
+						</div>
+					</div>
+				</div>
+				<div class="selectPart" style="height:9vh;">
+					<div class="selectTitle">规则：</div>
+					<div class="selectList">
+						<div style="height:4.5vh;">
+							<div class="selectItem" ng-click="selectChange(2,1)">
+								<div class="selectBox"></div>
+								<img src="static/picture/tick_1.png" ng-show="createInfo.landlord.ask_mode==1" />
+								<div class="selectText">轮流问地主</div>
+							</div>
+						</div>	
+						<div style="height:4.5vh;" >
+							<div class="selectItem" ng-click="selectChange(2,2)">
+								<div class="selectBox" ></div>
+								<img src="static/picture/tick_1.png" ng-show="createInfo.landlord.ask_mode==2" />
+								<div class="selectText">随机问地主</div>
+							</div>
+						</div>	
+					</div>
+				</div>
+				<div class="selectPart" style="height:9vh;">
+					<div class="selectTitle">局数：</div>
+					<div class="selectList">
+						<div class="selectItem"  ng-click="selectChange(3,1)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.landlord.ticket_count==1" />
+							<div class="selectText" >6局X1张房卡</div>
+						</div>							
+						<div class="selectItem" ng-click="selectChange(3,2)">
+							<div class="selectBox" ></div>
+							<img src="static/picture/tick_1.png" ng-show="createInfo.landlord.ticket_count==2" />
+							<div class="selectText" >12局X2张房卡</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 麻将 -->
+			<div ng-if="createInfo.isShow==8">
+					<div class="selectPart" style="height:13.5vh;">
+						<div class="selectTitle">鬼牌：</div>
+						<div class="selectList" >
+							<div class="selectItem"  ng-click="selectChange(1,0)">
+								<div class="selectBox" ></div>
+								<img src="static/picture/tick_1.png" ng-show="createInfo.majiang.joker==0"/>
+								<div class="selectText">无鬼牌</div>
+							</div>							
+							<div class="selectItem" ng-click="selectChange(1,1)" >
+								<div class="selectBox" ></div>
+								<img src="static/picture/tick_1.png" ng-show="createInfo.majiang.joker==1"/>
+								<div class="selectText">翻牌当鬼</div>
+							</div>							
+							<div class="selectItem" ng-click="selectChange(1,2)" >
+								<div class="selectBox" ></div>
+								<img src="static/picture/tick_1.png" ng-show="createInfo.majiang.joker==2" />
+								<div class="selectText">红中当鬼</div>
+							</div>
+							<div class="selectItem" ng-click="selectChange(1,3)" >
+								<div class="selectBox" ></div>
+								<img src="static/picture/tick_1.png" ng-show="createInfo.majiang.joker==3" />
+								<div class="selectText">红中当鬼(去掉风字)</div>
+							</div>
+						</div>
+					</div>	
+					<div class="selectPart" style="height:9vh;">
+						<div class="selectTitle">抓马：</div>
+						<div class="selectList">
+							<div>
+								<div class="selectItem"ng-click="selectChange(2,0)">
+									<div class="selectBox" ></div>
+									<img src="static/picture/tick_1.png" ng-show="createInfo.majiang.horse_count==0" />
+									<div class="selectText">不跑马</div>
+								</div>							
+								<div class="selectItem" ng-click="selectChange(2,2)">
+									<div class="selectBox" ></div>
+									<img src="static/picture/tick_1.png" ng-show="createInfo.majiang.horse_count==2"/>
+									<div class="selectText">2匹</div>
+								</div>		
+								<div class="selectItem" ng-click="selectChange(2,4)">
+									<div class="selectBox" ></div>
+									<img src="static/picture/tick_1.png" ng-show="createInfo.majiang.horse_count==4"/>
+									<div class="selectText">4匹</div>
+								</div>														
+							</div>
+							<div>	
+								<div class="selectItem" ng-click="selectChange(2,6)" >
+									<div class="selectBox" ></div>
+									<img src="static/picture/tick_1.png" ng-show="createInfo.majiang.horse_count==6"/>
+									<div class="selectText">6匹</div>
+								</div>
+								<div class="selectItem" ng-click="selectChange(2,8)">
+									<div class="selectBox" ></div>
+									<img src="static/picture/tick_1.png" ng-show="createInfo.majiang.horse_count==8" />
+									<div class="selectText">8匹</div>
+								</div>
+								<div class="selectItem" ng-click="selectChange(2,1)">
+									<div class="selectBox" ></div>
+									<img src="static/picture/tick_1.png" ng-show="createInfo.majiang.horse_count==1" />
+									<div class="selectText">爆炸马</div>
+								</div>
+							</div>
+						</div>
+					</div>					
+					<div class="selectPart" style="height:4.5vh;">
+						<div class="selectTitle">规则：</div>
+						<div class="selectList">
+								<div class="selectItem"  ng-click="selectChange(3)">
+									<div class="selectBox" ></div>
+									<img src="static/picture/tick_1.png" ng-show="createInfo.majiang.qianggang==1" />
+									<div class="selectText">抢杠全包</div>
+								</div>
+								<div class="selectItem" ng-click="selectChange(5)" >
+									<div class="selectBox" ></div>
+									<img src="static/picture/tick_1.png" ng-show="createInfo.majiang.chengbao==1" />
+									<div class="selectText">杠爆全包</div>
+								</div>
+						</div>
+
+					</div>					
+					<div class="selectPart" style="height:9vh;">	
+					<div class="selectTitle">房卡：</div>
+						<div class="selectList">
+							<div class="selectItem"  ng-click="selectChange(4,1)">
+								<div class="selectBox" ></div>
+								<img src="static/picture/tick_1.png" ng-show="createInfo.majiang.ticket_count==1" />
+								<div class="selectText" >6局X1张房卡</div>
+							</div>							
+							<div class="selectItem"  ng-click="selectChange(4,2)">
+								<div class="selectBox" ></div>
+								<img src="static/picture/tick_1.png" ng-show="createInfo.majiang.ticket_count==2" />
+								<div class="selectText" >12局X2张房卡</div>
+							</div>
+						</div>
+					</div>
+			</div>
+
+			<!-- 鱼虾蟹 -->
+			<div ng-if="createInfo.isShow==9">
+			    <div class="selectPart" style="height:9vh;">
+			        <div class="selectTitle">筹码：</div>
+			        <div class="selectList" >
+			            <div class="selectItem"  ng-click="selectChange(1,1)">
+			                <div class="selectBox"></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.xiaxie.chip_type==1"/>
+			                <div class="selectText" >&nbsp;&nbsp;5，10，20，50</div>
+			            </div>                          
+			            <div class="selectItem" ng-click="selectChange(1,2)" >
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.xiaxie.chip_type==2"/>
+			                <div class="selectText" >10，20，50，100</div>
+			            </div>                          
+			        </div>
+			    </div>
+			    <div class="selectPart" style="height:4.5vh;">
+			        <div class="selectTitle">上限：</div>
+			        <div class="selectList">                   
+			            <div class="selectItem"  ng-click="selectChange(4,100)">
+			                <div class="selectBox" > </div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.xiaxie.upper_limit==100" />
+			                <div class="selectText">100</div>
+			            </div>
+			            <div class="selectItem" style="margin-left: 1.5vh;" ng-click="selectChange(4,300)">
+			                <div class="selectBox" > </div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.xiaxie.upper_limit==300" />
+			                <div class="selectText">300</div>
+			            </div>
+			            <div class="selectItem" style="margin-left: 1.5vh;" ng-click="selectChange(4,500)">
+			                <div class="selectBox" > </div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.xiaxie.upper_limit==500" />
+			                <div class="selectText">500</div>
+			            </div>
+			        </div>
+			    </div>
+			    <div class="selectPart" style="height:4.5vh;">
+			        <div class="selectTitle">规则：</div>
+			        <div class="selectList">
+			            <div class="selectItem" ng-click="selectChange(2,1)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.xiaxie.rule_value1==1" />
+			                <div class="selectText" >三个相同5倍，两个相同3倍</div>
+			            </div>                          
+			        </div>
+			    </div>
+			    <div class="selectPart" style="height:9vh;">
+			        <div class="selectTitle">局数：</div>
+			        <div class="selectList">
+			            <div class="selectItem"  ng-click="selectChange(3,1)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.xiaxie.ticket_type==1" />
+			                <div class="selectText">12局X2张房卡</div>
+			            </div>                          
+			            <div class="selectItem"  ng-click="selectChange(3,2)">
+			                <div class="selectBox" > </div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.xiaxie.ticket_type==2" />
+			                <div class="selectText">24局X4张房卡</div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+
+			<!-- 牌九 -->
+			<div ng-if="createInfo.isShow==10">  
+			    <div class="selectPart" style="height:4vh;">
+			        <div class="selectTitle">底分：</div>
+			        <div class="selectList" >
+			            <div class="selectItem" ng-click="selectChange(1,1)" >
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.paijiu.score_type==1"/>
+			                <div class="selectText">1</div>
+			            </div>                          
+			            <div class="selectItem" ng-click="selectChange(1,2)" ng-show="createInfo.paijiu.banker_mode!=4">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.paijiu.score_type==2"/>
+			                <div class="selectText">2</div>
+			            </div>                          
+			            <div class="selectItem" ng-click="selectChange(1,3)" >
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.paijiu.score_type==3" />
+			                <div class="selectText">3</div>
+			            </div>
+			            <div class="selectItem" ng-click="selectChange(1,4)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.paijiu.score_type==4" />
+			                <div class="selectText">4</div>
+			            </div>
+			            <div class="selectItem" ng-click="selectChange(1,5)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.paijiu.score_type==5" />
+			                <div class="selectText">5</div>
+			            </div>
+			        </div>
+			    </div>
+
+			    <div class="selectPart" style="height:12vh;">
+			        <div class="selectTitle">规则：</div>
+			        <div class="selectList">
+			            <div class="selectItem"  ng-click="selectChange(2,1)">
+			                <div class="selectText" >至尊10倍,双天双地双人8倍,对子6倍,天王地王5倍,天杠地杠天高九地高九4倍,九点3倍,八点2倍</div>
+			            </div>                          
+			           
+			        </div>
+			    </div>  
+			    <div class="selectPart" style="height:4vh;">
+			        <div class="selectTitle">牌型：</div>
+			        <div class="selectList">
+			            <div class="selectItem"  ng-click="selectChange(3,1)">
+			                <div class="selectText" >丁三牌和二四牌可互换使用</div>
+			            </div>
+			        </div>
+			    </div>  
+			    <div class="selectPart" style="height:4vh;">
+			        <div class="selectTitle">局数：</div>
+			        <div class="selectList">
+			            <div class="selectItem"  ng-click="selectChange(4,1)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.paijiu.ticket_type==1" />
+			                <div class="selectText" >12局X2房卡</div>
+			            </div>                          
+			            <div class="selectItem"  ng-click="selectChange(4,2)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.paijiu.ticket_type==2" />
+			                <div class="selectText" >24局X4房卡</div>
+			            </div>
+			        </div>
+			    </div>
+			    
+			</div>
+
+			<!-- 大吃小斗牛 -->
+			<div ng-if="createInfo.isShow==12">  
+			    <div class="selectPart" style="height:8vh;">
+			        <div class="selectTitle">筹码：</div>
+			        <div class="selectList" >
+			            <div class="selectItem" ng-click="selectChange(1,1)" >
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dxbull.bet_type==1"/>
+			                <div class="selectText">300</div>
+			            </div>                          
+			            <div class="selectItem" ng-click="selectChange(1,2)" >
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dxbull.bet_type==2"/>
+			                <div class="selectText">500</div>
+			            </div>                          
+			            <div class="selectItem" ng-click="selectChange(1,3)" >
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dxbull.bet_type==3" />
+			                <div class="selectText">1000</div>
+			            </div>
+			           
+			        </div>
+			    </div>
+			   
+			    <div class="selectPart" style="height:8vh;">
+			        <div class="selectTitle">牌型：</div>
+			        <div class="selectList">
+			            <div class="selectItem"  ng-click="selectChange(3,1)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dxbull.is_cardfive==1" />
+			                <div class="selectText" >五花牛</div>
+			            </div>
+			            <div class="selectItem"  ng-click="selectChange(3,2)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dxbull.is_cardbomb==1" />
+			                <div class="selectText" >炸弹牛</div>
+			            </div>              
+			            <div class="selectItem"  ng-click="selectChange(3,3)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dxbull.is_cardtiny==1" />
+			                <div class="selectText" >五小牛</div>
+			            </div>
+			        </div>
+			    </div>  
+			    <div class="selectPart" style="height:4vh;">
+			        <div class="selectTitle">局数：</div>
+			        <div class="selectList">
+			            <div class="selectItem"  ng-click="selectChange(4,1)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dxbull.ticket_type==1" />
+			                <div class="selectText" >12局X2房卡</div>
+			            </div>                          
+			            <div class="selectItem"  ng-click="selectChange(4,2)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dxbull.ticket_type==2" />
+			                <div class="selectText" >24局X4房卡</div>
+			            </div>
+			        </div>
+			    </div>
+			 
+			</div>
+
+			<!-- 大吃小 -->
+			<div class="bullRull" ng-if="createInfo.isShow==13"> 
+			    <div class="selectPart" style="height:5vh;">
+			        <div class="selectTitle">人数：</div>
+			        <div class="selectList">
+			            <div class="selectItem"  ng-click="selectChange(6,1)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dcx.max_count_type==1" />
+			                <div class="selectText" >9人房间</div>
+			            </div>                          
+			            <div class="selectItem"  ng-click="selectChange(6,2)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dcx.max_count_type==2" />
+			                <div class="selectText" >12人房间</div>
+			            </div>
+			        </div>
+			    </div>  
+
+			    <div class="selectPart" style="height:7.5vh;">
+			        <div class="selectTitle">筹码：</div>
+			        <div class="selectList" >
+			            <div class="selectItem" ng-click="selectChange(1,1)" >
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dcx.bet_type==1"/>
+			                <div class="selectText">300</div>
+			            </div>                          
+			            <div class="selectItem" ng-click="selectChange(1,2)" >
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dcx.bet_type==2"/>
+			                <div class="selectText">500</div>
+			            </div>                          
+			            <div class="selectItem" ng-click="selectChange(1,3)" >
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dcx.bet_type==3" />
+			                <div class="selectText">1000</div>
+			            </div>
+			        </div>
+			    </div>
+
+			    <div class="selectPart" style="height:9vh;">
+			        <div class="selectTitle">牌型：</div>
+			        <div class="selectList">
+			            <div class="selectItem"  ng-click="selectChange(3,1)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dcx.is_cardjoker==1" />
+			                <div class="selectText" >天公x10,雷公x7,地公x5</div>
+			            </div>
+			            <div class="selectItem"  ng-click="selectChange(3,2)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dcx.is_cardbao9==1" />
+			                <div class="selectText" >暴玖x9</div>
+			            </div>              
+			            
+			        </div>
+			    </div>  
+			    <div class="selectPart" style="height:4.5vh;">
+			        <div class="selectTitle">局数：</div>
+			        <div class="selectList">
+			            <div class="selectItem"  ng-click="selectChange(4,1)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dcx.ticket_type==1" />
+			                <div class="selectText" ng-show="createInfo.dcx.max_count_type==1">12局X2房卡</div>
+			                <div class="selectText" ng-show="createInfo.dcx.max_count_type==2">12局X3房卡</div>
+			            </div>                          
+			            <div class="selectItem"  ng-click="selectChange(4,2)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.dcx.ticket_type==2" />
+			                <div class="selectText" ng-show="createInfo.dcx.max_count_type==1">24局X4房卡</div>
+			                <div class="selectText" ng-show="createInfo.dcx.max_count_type==2">24局X6房卡</div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+
+			<!-- 赖子斗牛 -->
+			<div ng-if="createInfo.isShow==14">
+
+			    <div class="selectPart" style="height:5vh;">
+			        <div class="selectTitle">人数：</div>
+			        <div class="selectList">
+			            <div class="selectItem"  ng-click="selectChange(5,2)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.max_count_type==2" />
+			                <div class="selectText" >9人房间</div>
+			            </div>                          
+			            <div class="selectItem"  ng-click="selectChange(5,3)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.max_count_type==3" />
+			                <div class="selectText" >12人房间</div>
+			            </div>
+			        </div>
+			    </div>            
+			    <div class="selectPart" style="height:4vh;">
+			        <div class="selectTitle">底分：</div>
+			        <div class="selectList" >
+			            <div class="selectItem" ng-click="selectChange(1,1)" >
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.score_type==1"/>
+			                <div class="selectText">1</div>
+			            </div>                          
+			            <div class="selectItem" ng-click="selectChange(1,2)" ng-show="createInfo.laibull.banker_mode!=4">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.score_type==2"/>
+			                <div class="selectText">2</div>
+			            </div>                          
+			            <div class="selectItem" ng-click="selectChange(1,3)" >
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.score_type==3" />
+			                <div class="selectText">3</div>
+			            </div>
+			            <div class="selectItem" ng-click="selectChange(1,4)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.score_type==4" />
+			                <div class="selectText">4</div>
+			            </div>
+			            <div class="selectItem" ng-click="selectChange(1,5)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.score_type==5" />
+			                <div class="selectText">5</div>
+			            </div>
+			        </div>
+			    </div>
+			    <div class="selectPart" style="height:8vh;">
+			        <div class="selectTitle">下注：</div>
+			        <div class="selectList">
+			            <div class="selectItem"  ng-click="selectChange(6,1)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.bet_type==1" />
+			                <div class="selectText" >1/2/4/5倍</div>
+			            </div>                          
+			            <div class="selectItem"  ng-click="selectChange(6,2)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.bet_type==2" />
+			                <div class="selectText" >1/3/5/8倍</div>
+			            </div>
+			            <div class="selectItem"  ng-click="selectChange(6,3)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.bet_type==3" />
+			                <div class="selectText" >2/4/6/10倍</div>
+			            </div>
+			        </div>
+			    </div>  
+			    <div class="selectPart" style="height:8vh;">
+			        <div class="selectTitle">规则：</div>
+			        <div class="selectList">
+			            <div class="selectItem"  ng-click="selectChange(2,1)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.rule_type==1" />
+			                <div class="selectText" >牛牛x3牛九x2牛八x2</div>
+			            </div>                          
+			            <div class="selectItem"  ng-click="selectChange(2,2)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.rule_type==2" />
+			                <div class="selectText" >牛牛x4牛九x3牛八x2牛七x2</div>
+			            </div>
+			        </div>
+			    </div>  
+			    <div class="selectPart" style="height:16vh;">
+			        <div class="selectTitle">牌型：</div>
+			        <div class="selectList">
+			            <div class="selectItem"  ng-click="selectChange(3,1)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.is_cardfour==1" />
+			                <div class="selectText" >四花牛(4倍)</div>
+			            </div>
+			            <div class="selectItem"  ng-click="selectChange(3,2)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.is_cardfive==1" />
+			                <div class="selectText" >五花牛(5倍)</div>
+			            </div>
+			            <div class="selectItem"  ng-click="selectChange(3,3)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.is_straight==1" />
+			                <div class="selectText" >顺子牛(6倍)</div>
+			            </div>
+			            <div class="selectItem"  ng-click="selectChange(3,4)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.is_flush==1" />
+			                <div class="selectText" >同花牛(6倍)</div>
+			            </div>
+			            <div class="selectItem"  ng-click="selectChange(3,5)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.is_calabash==1" />
+			                <div class="selectText" >葫芦牛(6倍)</div>
+			            </div>
+			            <div class="selectItem"  ng-click="selectChange(3,6)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.is_cardbomb==1" />
+			                <div class="selectText" >炸弹牛(8倍)</div>
+			            </div>
+			            <div class="selectItem"  ng-click="selectChange(3,7)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.is_sequence==1" />
+			                <div class="selectText" >同花顺(9倍)</div>
+			            </div>              
+			            <div class="selectItem"  ng-click="selectChange(3,8)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.is_cardtiny==1" />
+			                <div class="selectText" >五小牛(10倍)</div>
+			            </div>
+			        </div>
+			    </div>  
+			    <div class="selectPart" style="height:4vh;">
+			        <div class="selectTitle">局数：</div>
+			        <div class="selectList">
+			            <div class="selectItem"  ng-click="selectChange(4,1)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.ticket_type==1" />
+			                <div class="selectText" ng-show="createInfo.laibull.max_count_type==2">12局X2房卡</div>
+			                <div class="selectText" ng-show="createInfo.laibull.max_count_type==3">12局X3房卡</div>
+			            </div>                          
+			            <div class="selectItem"  ng-click="selectChange(4,2)">
+			                <div class="selectBox" ></div>
+			                <img src="static/picture/tick_1.png" ng-show="createInfo.laibull.ticket_type==2" />
+			                <div class="selectText" ng-show="createInfo.laibull.max_count_type==2">24局X4房卡</div>
+			                <div class="selectText" ng-show="createInfo.laibull.max_count_type==3">24局X6房卡</div>
+			            </div>
+			        </div>
+			    </div>
+			    <div class="selectPart" style="height:9vh;line-height:4.5vh ">
+			        <div class="selectTitle">时间：</div>
+			        <div class="selectList">                        
+			            <div class="selectItem"  >
+			                <div class="text" style="float: left;">准备</div>
+			                <select ng-model="createInfo.laibull.ready_time">
+			                    <option value="5">5秒</option>
+			                    <option value="6">6秒</option>
+			                    <option value="7">7秒</option>
+			                    <option value="8">8秒</option>
+			                    <option value="9">9秒</option>
+			                    <option value="10">10秒</option>
+			                </select>
+			            </div>
+			            <div class="selectItem"  style="margin-left: 1vh;">
+			                <div class="text" style="float: left;">抢庄</div>
+			                <select ng-model="createInfo.laibull.grab_time">
+			                    <option value="5">5秒</option>
+			                    <option value="6">6秒</option>
+			                    <option value="7">7秒</option>
+			                    <option value="8">8秒</option>
+			                    <option value="9">9秒</option>
+			                    <option value="10">10秒</option>
+			                </select>
+			            </div>
+			        </div>  
+			        <div class="selectList" style="margin-left: 8vh;margin-top: .4vh">
+			            <div class="selectItem"  >
+			                <div class="text" style="float: left;">下注</div>
+			                <select ng-model="createInfo.laibull.bet_time   ">
+			                    <option value="5">5秒</option>
+			                    <option value="6">6秒</option>
+			                    <option value="7">7秒</option>
+			                    <option value="8">8秒</option>
+			                    <option value="9">9秒</option>
+			                    <option value="10">10秒</option>
+			                </select>
+			            </div>
+			            <div class="selectItem" style="margin-left: 1vh;">
+			                <div class="text" style="float: left;">摊牌</div>
+			                <select ng-model="createInfo.laibull.show_time">
+			                    <option value="5">5秒</option>
+			                    <option value="6">6秒</option>
+			                    <option value="7">7秒</option>
+			                    <option value="8">8秒</option>
+			                    <option value="9">9秒</option>
+			                    <option value="10">10秒</option>
+			                </select>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+
+		</div>
+
+		<div class="createCommit" ng-click="createCommit()" >确定</div>
+	</div>
+</div>
+
+<!-- 绑定手机号码 -->
+<div id="validePhone" ng-show="isAuthPhone==1">
+	<div class="phoneMask" style="position: fixed;z-index: 98;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(0,0,0,0.5);" ng-click="hideBindPhone()"></div>
+	<div class="phoneFrame"  style="position: fixed;z-index: 99;width: 80vw;max-width: 80vw; top: 50%; left: 50%;-webkit-transform:translate(-50%,-60%); background-color: #fff; text-align: center; border-radius: 8px; overflow: hidden;opacity: 1; color: white;">
+		<div style="height: 2.2vw;"></div>
+
+		<div style="padding: 0vh;font-size: 3.5vw; line-height: 8vw; word-wrap: break-word;word-break: break-all;color: #000;background-color: white;" >
+			验证手机号，房卡可找回。
+		</div>
+		<div style="height: 2.2vw;"></div>
+		<div style="position: relative;height: 15vw;word-wrap: break-word;word-break: break-all;color: #000;background-color: white;border-top: solid;border-color: #e6e6e6;border-width: 0px;">
+
+			<input  ng-input="phoneChange()" ng-model="sPhone" type="number" name="phone" placeholder="输入手机号" style="padding:0 12px 0 12px;position: absolute;top:  2.5vw;left: 4vw;width: 48vw;height: 11vw;line-height: 6.5vw;border-style: solid;border-width: 1px;border-radius: 0.5vh;border-color: #e6e6e6;font-size: 4vw;-webkit-appearance: none;">
+			<div id="authcode" ng-click="getAuthcode()" style="position: absolute;top:  2.5vw;right: 4vw; width: 22vw;height: 10vw;line-height: 10vw;background-color: rgb(211,211,211);font-size: 3.5vw;border-radius: 0.5vh;color: white;">
+				{{authcodeText}}
+			</div>
+		</div>
+		<div style="position: relative;height: 15vw;word-wrap: break-word;word-break: break-all;color: #000;background-color: white;border-top: solid;border-color: #e6e6e6;border-width: 0px;">
+			
+			<input  ng-model="sAuthcode" type="number" name="phone1" placeholder="输入验证码" style="padding:0 12px 0 12px;position: absolute;top: 1vw;left: 4vw;width: 72vw;height: 11vw;line-height: 6.5vw;border-style: solid;border-width: 1px;border-radius: 0.5vh;border-color: #e6e6e6;font-size: 4vw;-webkit-appearance: none;">
+
+		</div>
+		<div style="height: 2.2vw;"></div>
+		<div style="position: relative; left: 4vw;width: 72vw;line-height: 10vw; font-size: 4vw;display: flex;border-radius: 2vw;" ng-click="bindPhone()">
+			<div style="display: block;-webkit-box-flex:1;flex: 1;text-decoration: none;-webkit-tap-highlight-color:transparent;position: relative;margin-bottom: 0;color: rgb(255,255,255);border-top: solid;border-color: #e6e6e6;border-width: 0px;background-color: rgb(64,112,251);border-radius: 1vw;">立即绑定</div>
+		</div>
+		<div style="height: 4vw;"></div>
+	</div>
+</div>
+<!-- 显示客服-->
+		<div  id="kefu" style="display: none;" ng-click="hideKeFu($event)">
+			<div class="phoneMask" style="" ng-click="hideKeFu($event)"></div>
+			<div class="phoneFrame_" style="">
+                 <div style="    position: absolute;
+    width: 48vh;
+    left: 27%;
+    z-index: 99;
+    margin-left: -12vh;
+    top: -30.5vh;">
+                 <img style="display: block;width: 100%;height: auto;" src="static/picture/text_protocol_1.png"></div>
+            </div>     
+		</div>
+	
+<style>
+.waiting{position: fixed;width:100%;height:100%;top:0;left:0;z-index: 111;}	
+.waiting .waitingBack{position: fixed;width:100%;height:100%;top:0;left:0;background: #000;opacity:.5;}	
+</style>	
+<div class="waiting" ng-show="is_operation">
+	<div class="waitingBack"></div>
+	<div class="load4">
+		<div class="loader">Loading...</div>
+	</div>
+</div>	
+	
+</div>
+<script type="text/javascript">
+
+var newNum = "";
+var per = window.innerWidth / 530;
+var globalData = {
+	"card":"19",
+	"isNotyMsg":'0',
+	"notyMsg":'',
+	"notyTime":'0',
+	"notySpeed":10000,
+};
+
+
+var app=angular.module('app',[]);
+
+app.directive('ngInput', [function () {
+	return {
+		restrict: 'A',
+		require: '?ngModel',
+		link: function(scope, element, attrs) {
+			element.on('input',oninput);
+            scope.$on('$destroy',function(){//销毁的时候取消事件监听
+            	element.off('input',oninput);
+            });
+            function oninput(event){
+            	scope.$evalAsync(attrs['ngInput'],{$event:event,$value:this.value});
+            }
+        }
+    }
+}]);
+
+app.controller("myCtrl", function($scope,$http) {	
+	FastClick.attach(document.body);
+	$scope.gotopage=function(){
+		window.location.href = "http://3848youwan3.jgwzzq.cn/k/pa";
+	}
+	$scope.gotored=function(){
+		window.location.href = "http://3848youwan3.jgwzzq.cn/ay/rp";
+	}
+	$scope.gotoerweima=function(){
+		window.location.href='erweima';
+	}
+
+	$scope.isShowKefu = false;
+	$scope.alertKefu = function(){
+		console.log(1)
+		$('#kefu').show()
+	}
+	$scope.hideKeFu = function (){
+		console.log(2)
+		$('#kefu').hide()
+	}
+
+	$scope.width=window.innerWidth;
+	$scope.userInfo={
+		"id":"14861",
+		"name":"棋牌交流qq8790766",
+		"avatar":"http://thirdwx.qlogo.cn/mmopen/vi_32/Of4EcRU8ZkYHutxKcVUmyNp4cThbBA2XFx27RzUsB8qWicfQplaia3fv8fTKxL6gc4XAPlzDHwWjuaDLSkHwXhvw/132",
+		"card":0,
+
+	}
+
+	$scope.userInfo.card="19";
+
+///////////////////////socket	
+
+	var socketStatus=0;
+	$(".main").show();		
+	$("#loading").hide();	
+	$scope.activity=new Array();	
+	$scope.isShowAlert=false;
+	$scope.alertType=0;
+	$scope.alertText="";
+	$scope.showAlert=function(type,text){
+		$(".alertText").css("top","90px")
+		$scope.alertType=type;
+		$scope.alertText=text;
+		$scope.isShowAlert=true;
+
+		setTimeout(function() {
+			$scope.$apply();
+		}, 0);
+
+		setTimeout(function(){
+			var wHeight = window.innerHeight;
+			var alertHeight = $(".alertText").height();
+			var textHeight = $(".alertText").height();
+
+            if (alertHeight < wHeight * 0.15) {
+				alertHeight = wHeight * 0.15;
+			}
+
+			if (alertHeight > wHeight * 0.8) {
+				alertHeight = wHeight * 0.8;
+			}
+
+			var mainHeight = alertHeight + wHeight * (0.022 + 0.034) * 2 + wHeight * 0.022 + wHeight * 0.056;
+			if (type == 8) {
+				mainHeight = mainHeight - wHeight * 0.022 - wHeight * 0.056
+			}
+
+            var blackHeight = alertHeight + wHeight * 0.034 * 2;
+            var alertTop = wHeight * 0.022 + (blackHeight - textHeight) / 2;
+            
+			$(".alert .mainPart").css('height', mainHeight + 'px');
+			$(".alert .mainPart").css('margin-top', '-' + mainHeight / 2 + 'px');
+			$(".alert .mainPart .backImg .blackImg").css('height', blackHeight + 'px');
+            $(".alert .mainPart .alertText").css('top', alertTop + 'px');
+
+			$scope.$apply();
+		},0)
+	}	
+	$scope.closeAlert=function(){
+		if($scope.alertType==1){
+			$scope.isShowAlert=false;
+			if(!$scope.is_connect){
+				$scope.is_connect=true;
+			}
+		}
+		else{
+			$scope.isShowAlert=false;
+		}
+	}
+
+    $scope.getAuthcodeHttp=function(phone){
+		$http({		
+			url:'http://3848youwan3.jgwzzq.cn/account/getMobileSms',
+			method: 'POST',  
+			headers:{
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			data:{
+				"phone":phone,
+				"session":"MjMyOWYzZTBjODkzZTQ0ZGI2ODk1ZjY2NGI5OTgwMGY=",
+			},
+		}).success(function(data){
+			
+			if (data.result==0) {
+				setTimeout(function() {
+					$scope.authcodeTime = 60;
+					authcodeTimer();
+					$scope.authcodeType = 2;
+				}, 0);					
+				
+			} else {
+				alert(data.result_message)
+			}
+		}).error(function(data){
+			console.log(data);
+		});	
+	};
+
+	$scope.bindPhoneHttp=function(phone,authcode){
+		$http({		
+			url:'http://3848youwan3.jgwzzq.cn/account/checkSmsCode',
+			method: 'POST',  
+			headers:{
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			data:{
+				"phone":phone,
+				"code":authcode,
+				"session":"MjMyOWYzZTBjODkzZTQ0ZGI2ODk1ZjY2NGI5OTgwMGY=",
+			},
+		}).success(function(data){
+			
+			if(data.result==0){					
+				setTimeout(function() {
+					$scope.isAuthPhone = 0;
+                    $scope.phone = $scope.sPhone;
+
+                    if (data.data.account_id != $scope.userInfo.id) {
+                    	$scope.showAlert(23,data.result_message);
+                    } else {
+                    	$scope.showAlert(6,data.result_message);
+                    }
+
+					$scope.userInfo.card = parseInt($scope.userInfo.card) + parseInt(data.data.card_count);
+
+					$scope.sPhone = '';
+					$scope.sAuthcode = '';
+					$scope.$apply();
+				}, 0);
+			} else{
+				setTimeout(function() {
+					$scope.showAlert(6,data.result_message);
+					$scope.$apply();
+				}, 0);
+			}
+		}).error(function(data){
+			setTimeout(function() {
+				$scope.authcodeTime = 0;
+				$scope.showAlert(6,"绑定失败");
+				$scope.$apply();
+			}, 0);
+		});	
+	};
+
+	$scope.isAuthPhone = "0";
+	$scope.phone = "13051176171";
+	$scope.sPhone='';
+	$scope.sAuthcode='';
+	$scope.authcodeType=1;
+	$scope.authcodeText='发送验证码';
+	$scope.authcodeTime=60;
+	$scope.phoneType=1;
+	$scope.phoneText='绑定手机';
+
+	setTimeout(function() {
+		$scope.$apply();
+	}, 100);
+
+	$scope.finishBindPhone = function () {
+		window.location.href=window.location.href+"&id="+10000*Math.random();
+	};
+
+	$scope.reloadView = function () {
+		window.location.href=window.location.href+"&id="+10000*Math.random();
+	};
+
+    $scope.bindPhone = function () {
+		var validPhone = checkPhone($scope.sPhone);
+		var validAuthcode = checkAuthcode($scope.sAuthcode);
+
+		if (validPhone == false) {
+			setTimeout(function() {
+				$scope.showAlert(6,'手机号码有误，请重填');
+			}, 0);
+             
+			return;
+		} 
+
+		if (validAuthcode == false) {
+			setTimeout(function() {
+				$scope.showAlert(6,'验证码有误，请重填');
+			}, 0);
+            
+			return;
+		} 
+        
+        $scope.bindPhoneHttp($scope.sPhone,$scope.sAuthcode);
+    };
+
+    $scope.getAuthcode = function () {
+		if ($scope.authcodeType != 1) {
+			return;
+		}
+
+		var color = $('#authcode').css('background-color');
+        
+        if (color != 'rgb(64, 112, 251)') {
+            return;
+        }
+
+        var validPhone = checkPhone($scope.sPhone);
+
+		if (validPhone == false) {
+			setTimeout(function() {
+				$scope.showAlert(6,'手机号码有误，请重填');
+			}, 10);
+             
+			return;
+		} 
+        
+        $scope.getAuthcodeHttp($scope.sPhone);
+    };
+
+    $scope.phoneChange = function () {
+		var result = checkPhone($scope.sPhone);
+        if (result) {
+            $('#authcode').css('background-color','rgb(64,112,251)');
+        } else {
+            $('#authcode').css('background-color','lightgray');
+        }
+	};
+
+    function checkPhone(phone) {
+		
+    	if (!(/^1(3|4|5|6|7|8)\d{9}$/.test(phone))) {
+    		return false;
+    	} else {
+    		return true;
+    	}
+    };
+
+    function checkAuthcode(code) {
+		if (code == '' || code == undefined) {
+			return false;
+		}
+
+    	var reg = new RegExp("^[0-9]*$");
+    	if (!reg.test(code)) {
+    		return false;
+    	} else {
+    		return true;
+    	}
+    };
+
+    var authcodeTimer = function authcodeTimer() {
+    	if ($scope.authcodeTime <= 0) {
+    		$scope.authcodeText = '发送验证码';
+    		$scope.authcodeTime = 60;
+    		$scope.authcodeType = 1;
+    		return;
+    	}
+
+    	$scope.authcodeTime = $scope.authcodeTime - 1;
+    	$scope.authcodeText = $scope.authcodeTime + 's';
+
+    	setTimeout(function() {
+    		$scope.$apply();
+    	}, 0);
+
+    	setTimeout(function () {
+    		authcodeTimer();
+    	}, 1000);
+    };
+
+    //广播
+    $scope.isShowNoty = false;
+    $scope.notyMsg = '';
+    
+    setTimeout(function () {
+        if (globalData.isNotyMsg != undefined && globalData.isNotyMsg != null) {
+            $scope.notyMsg = globalData.notyMsg;
+            if (globalData.isNotyMsg == 1) {
+                $scope.isShowNoty = true;
+                setTimeout(function () {
+                    $scope.isShowNoty = false;
+                    $scope.$apply();
+                }, globalData.notyTime * 1000);
+                $scope.$apply();
+            }
+        } else {
+            globalData.isNotyMsg = 0;
+        }
+        
+        $('#marquee').marquee({
+            //speed in milliseconds of the marquee
+            duration: globalData.notySpeed,
+            //gap in pixels between the tickers
+            gap: 50,
+            //time in milliseconds before the marquee will start animating
+            delayBeforeStart: 0,
+            //'left' or 'right'
+            direction: 'left',
+            //true or false - should the marquee be duplicated to show an effect of continues flow
+            duplicated: true
+        });
+    
+    }, 50);
+
+
+	$scope.is_operation=false;
+	$scope.waiting=function(){
+		$scope.is_operation=true;
+		setTimeout(function(){
+			if($scope.is_operation){
+				$scope.is_operation=false;
+				$scope.showAlert(6,"创建房间失败，请重新创建")	
+			}	
+		},15000)
+	};
+	$scope.socket_url="";
+	$scope.socket_type="";
+	$scope.connectSocket=function(socket,type){
+		$scope.socket_url=socket;
+		$scope.socket_type=type;
+		$scope.ws = new WebSocket(socket);
+		$scope.ws.onopen = function(){
+			$scope.is_operation=true;
+			var tiao=setInterval(function(){
+				socketStatus=socketStatus+1;
+	        	$scope.ws.send("@");
+	        	if(socketStatus>3||socketStatus>3){
+					window.location.reload();
+				}
+	    	},4000);
+			console.log("socketOpen");
+
+			if(type==1){	//斗牛 6、9、12、10
+				$scope.ws.send(JSON.stringify({
+					"operation":"CreateRoom",
+					"account_id":"14861",
+					"session":"MjMyOWYzZTBjODkzZTQ0ZGI2ODk1ZjY2NGI5OTgwMGY=",
+					"data":{
+						"data_key":Date.parse(new Date())+randomString(5),
+						"ticket_type":$scope.createInfo.bullx.ticket_type,
+						"score_type":$scope.createInfo.bullx.score_type,
+						"bet_type":$scope.createInfo.bullx.bet_type,
+						"rule_type":$scope.createInfo.bullx.rule_type,
+						"is_cardfive":$scope.createInfo.bullx.is_cardfive,
+						"is_cardbomb":$scope.createInfo.bullx.is_cardbomb,
+						"is_cardtiny":$scope.createInfo.bullx.is_cardtiny,
+						"is_cardfour":$scope.createInfo.bullx.is_cardfour,
+						"is_flush":$scope.createInfo.bullx.is_flush,
+						"is_calabash":$scope.createInfo.bullx.is_calabash,
+						"is_straight":$scope.createInfo.bullx.is_straight,
+						"is_sequence":$scope.createInfo.bullx.is_sequence,
+						"banker_mode":$scope.createInfo.bullx.banker_mode,
+						"banker_score_type":$scope.createInfo.bullx.banker_score,
+						"ready_time":$scope.createInfo.bullx.ready_time,
+						"grab_time":$scope.createInfo.bullx.grab_time,
+						"bet_time":$scope.createInfo.bullx.bet_time,
+						"show_time":$scope.createInfo.bullx.show_time,
+						//房间人数类型
+						"max_count_type":$scope.createInfo.bullx.max_count_type,
+						"is_laizi":0,
+					}
+				}));
+			} else if(type==4){
+				$scope.ws.send(JSON.stringify({
+					"operation":"CreateRoom",
+					"account_id":"14861",
+					"session":"MjMyOWYzZTBjODkzZTQ0ZGI2ODk1ZjY2NGI5OTgwMGY=",
+					"data":{
+						"data_key":Date.parse(new Date())+randomString(5),
+						//房间人数
+						"max_count_type":$scope.createInfo.flower.max_count_type,
+						'default_score': $scope.createInfo.flower.default_score,
+						'chip_type': $scope.createInfo.flower.chip_type,
+						'disable_pk':$scope.createInfo.flower.disable_pk,
+						'disable_look':$scope.createInfo.flower.disable_look,
+						'upper_limit':$scope.createInfo.flower.upper_limit,
+						'pk_score': $scope.createInfo.flower.pk_score,
+						'look_score': $scope.createInfo.flower.look_score,
+						'ticket_type':$scope.createInfo.flower.ticket_type,
+					}
+				}));
+			}else if(type==5){
+				$scope.ws.send(JSON.stringify({
+					"operation":"CreateRoom",
+					"account_id":"14861",
+					"session":"MjMyOWYzZTBjODkzZTQ0ZGI2ODk1ZjY2NGI5OTgwMGY=",
+					"data":{
+						"data_key":Date.parse(new Date())+randomString(5),
+						"ticket_type":$scope.createInfo.sangong.ticket_type,
+						"score_type":$scope.createInfo.sangong.score_type,
+						//房间人数
+						"max_count_type":$scope.createInfo.sangong.max_count_type,
+						"is_cardjoker":$scope.createInfo.sangong.is_cardjoker,
+						"is_cardbao9":$scope.createInfo.sangong.is_cardbao9,
+						"banker_mode":$scope.createInfo.sangong.banker_mode,
+						"banker_score_type":$scope.createInfo.sangong.banker_score,
+					}
+				}));
+			}else if(type==6){
+				$scope.ws.send(JSON.stringify({
+					"operation":"CreateRoom",
+					"account_id":"14861",
+					"session":"MjMyOWYzZTBjODkzZTQ0ZGI2ODk1ZjY2NGI5OTgwMGY=",
+					"data":{
+						"data_key":Date.parse(new Date())+randomString(5),
+						"banker_mode":$scope.createInfo.erbagang.banker_mode,
+						"chip_type":$scope.createInfo.erbagang.chip_type,
+						"banker_score_type":$scope.createInfo.erbagang.score_type,	 //上庄分数类型
+						"rule_type":$scope.createInfo.erbagang.rule_type,
+						"ticket_count":$scope.createInfo.erbagang.ticket_count,  //消耗房卡数
+					}
+				}));
+			}else if(type==7){
+				$scope.ws.send(JSON.stringify({
+					"operation":"CreateRoom",
+					"account_id":"14861",
+					"session":"MjMyOWYzZTBjODkzZTQ0ZGI2ODk1ZjY2NGI5OTgwMGY=",
+					"data":{
+						"data_key":Date.parse(new Date())+randomString(5),
+						"ticket_count":$scope.createInfo.landlord.ticket_count,
+						"base_score":$scope.createInfo.landlord.base_score,
+						"ask_mode":$scope.createInfo.landlord.ask_mode,
+					}
+				}));
+			}else if(type==8){
+				$scope.ws.send(JSON.stringify({
+					"operation":"CreateRoom",
+					"account_id":"14861",
+					"session":"MjMyOWYzZTBjODkzZTQ0ZGI2ODk1ZjY2NGI5OTgwMGY=",
+					"data":{
+					"data_key":Date.parse(new Date())+randomString(5),
+						"joker":$scope.createInfo.majiang.joker,
+						"horse_count":$scope.createInfo.majiang.horse_count,
+						"qianggang":$scope.createInfo.majiang.qianggang,
+						"chengbao":$scope.createInfo.majiang.chengbao,
+						"ticket_count":$scope.createInfo.majiang.ticket_count,
+					}
+				}));
+			}
+			else if(type==9){
+                $scope.ws.send(JSON.stringify({
+                    "operation":"CreateRoom",
+                    "account_id":"14861",
+                    "session":"MjMyOWYzZTBjODkzZTQ0ZGI2ODk1ZjY2NGI5OTgwMGY=",
+                    "data":{
+                        "data_key":Date.parse(new Date())+randomString(5),
+                        'chip_type': $scope.createInfo.xiaxie.chip_type,
+                        'ticket_type':$scope.createInfo.xiaxie.ticket_type,
+                        'rule_value1':$scope.createInfo.xiaxie.rule_value1,
+                        'upper_limit':$scope.createInfo.xiaxie.upper_limit,
+                    }
+                }));
+            }
+			else if(type==10){
+			    $scope.ws.send(JSON.stringify({
+			        "operation":"CreateRoom",
+			        "account_id":"14861",
+			        "session":"MjMyOWYzZTBjODkzZTQ0ZGI2ODk1ZjY2NGI5OTgwMGY=",
+			        "data":{
+			            "data_key":Date.parse(new Date())+randomString(5),
+			            "ticket_type":$scope.createInfo.paijiu.ticket_type,
+			            "score_type":$scope.createInfo.paijiu.score_type,
+			            "banker_mode":$scope.createInfo.paijiu.banker_mode,
+			        }
+			    }));        
+			}
+			else if(type==12){
+			    $scope.ws.send(JSON.stringify({
+			        "operation":"CreateRoom",
+			        "account_id":"14861",
+			        "session":"MjMyOWYzZTBjODkzZTQ0ZGI2ODk1ZjY2NGI5OTgwMGY=",
+			        "data":{
+			            "data_key":Date.parse(new Date())+randomString(5),
+			            "ticket_type":$scope.createInfo.dxbull.ticket_type,
+			            "bet_type":$scope.createInfo.dxbull.bet_type,
+			            "is_cardfive":$scope.createInfo.dxbull.is_cardfive,
+			            "is_cardbomb":$scope.createInfo.dxbull.is_cardbomb,
+			            "is_cardtiny":$scope.createInfo.dxbull.is_cardtiny,
+			        }
+			    }));        
+			}
+			else if(type==13){  //大吃小
+			    $scope.ws.send(JSON.stringify({
+			        "operation":"CreateRoom",
+			        "account_id":"14861",
+			        "session":"MjMyOWYzZTBjODkzZTQ0ZGI2ODk1ZjY2NGI5OTgwMGY=",
+			        "data":{
+			            "data_key":Date.parse(new Date())+randomString(5),
+			            "max_count_type":$scope.createInfo.dcx.max_count_type,
+			            "ticket_type":$scope.createInfo.dcx.ticket_type,
+			            "bet_type":$scope.createInfo.dcx.bet_type,
+			            "is_cardjoker":$scope.createInfo.dcx.is_cardjoker,
+			            "is_cardbao9":$scope.createInfo.dcx.is_cardbao9,
+			        }
+			    }));        
+			}
+			else if(type==14){  //赖子牛牛
+			    console.log($scope.createInfo.laibull);
+			    $scope.ws.send(JSON.stringify({
+			        "operation":"CreateRoom",
+			        "account_id":"14861",
+			        "session":"MjMyOWYzZTBjODkzZTQ0ZGI2ODk1ZjY2NGI5OTgwMGY=",
+			        "data":{
+			            "data_key":Date.parse(new Date())+randomString(5),
+			            "max_count_type":$scope.createInfo.laibull.max_count_type,
+			            "ticket_type":$scope.createInfo.laibull.ticket_type,
+			            "score_type":$scope.createInfo.laibull.score_type,
+			            "bet_type":$scope.createInfo.laibull.bet_type,
+			            "rule_type":$scope.createInfo.laibull.rule_type,
+			            "is_cardfive":$scope.createInfo.laibull.is_cardfive,
+			            "is_cardbomb":$scope.createInfo.laibull.is_cardbomb,
+			            "is_cardtiny":$scope.createInfo.laibull.is_cardtiny,
+			            "is_cardfour":$scope.createInfo.laibull.is_cardfour,
+			            "is_flush":$scope.createInfo.laibull.is_flush,
+			            "is_calabash":$scope.createInfo.laibull.is_calabash,
+			            "is_straight":$scope.createInfo.laibull.is_straight,
+			            "is_sequence":$scope.createInfo.laibull.is_sequence,
+			            "banker_mode":$scope.createInfo.laibull.banker_mode,
+			            "banker_score_type":$scope.createInfo.laibull.banker_score,
+			            "ready_time":$scope.createInfo.laibull.ready_time,
+			            "grab_time":$scope.createInfo.laibull.grab_time,
+			            "bet_time":$scope.createInfo.laibull.bet_time,
+			            "show_time":$scope.createInfo.laibull.show_time,
+			            "is_laizi":1
+			        }
+			    }));        
+			}
+
+		};
+		$scope.ws.onmessage = function(evt){
+			if(evt.data=="@"){
+				socketStatus=0;
+				return 0;
+			}
+			var obj = eval('(' + evt.data + ')');	
+			if (obj.result==1){
+				$scope.is_operation=false;
+				$scope.showAlert(1,obj.result_message);
+			} else if (obj.result == 0){
+				if(type==1){
+					window.location.href="http://3848youwan3.jgwzzq.cn/k/n?i="+obj.data.room_number+"_";
+				} else if(type==2){
+					window.location.href="http://3848youwan3.jgwzzq.cn/k/nn?i="+obj.data.room_number+"_";
+				} else if(type==3){
+					window.location.href="http://3848youwan3.jgwzzq.cn/k/nnn?i="+obj.data.room_number+"_";
+				} else if(type==4){
+					window.location.href="http://3848youwan3.jgwzzq.cn/k/zh?i="+obj.data.room_number+"_";
+				} else if(type==5){
+					window.location.href="http://3848youwan3.jgwzzq.cn/k/gn?i="+obj.data.room_number+"_";
+				} else if(type==6){
+					window.location.href="http://3848youwan3.jgwzzq.cn/k/er?i="+obj.data.room_number+"_";
+				} else if(type==7){
+					window.location.href="http://3848youwan3.jgwzzq.cn/k/dz?i="+obj.data.room_number+"_";
+				} else if(type==8){
+					window.location.href="http://3848youwan3.jgwzzq.cn/k/mj?i="+obj.data.room_number+"_";
+				} else if(type==9){
+                    window.location.href="http://3848youwan3.jgwzzq.cn/k/xx?i="+obj.data.room_number+"_";
+                }  else if(type==10){
+                    window.location.href="http://3848youwan3.jgwzzq.cn/k/pj?i="+obj.data.room_number+"_";
+            	} else if(type==12){
+                    window.location.href="http://3848youwan3.jgwzzq.cn/k/dxb?i="+obj.data.room_number+"_";
+                } else if(type==13){
+                    window.location.href="http://3848youwan3.jgwzzq.cn/k/dcx?i="+obj.data.room_number+"_";
+                } else if(type==14){
+                    window.location.href="http://3848youwan3.jgwzzq.cn/k/laib?i="+obj.data.room_number+"_";
+                }  else if(type==15){
+                    window.location.href="http://3848youwan3.jgwzzq.cn/k/nn10?i="+obj.data.room_number+"_";
+                } 
+			}  else if (obj.result == -201){
+				$scope.is_operation=false;
+				$scope.showAlert(31,obj.result_message);
+			}  else {
+				$scope.is_operation=false;
+				$scope.showAlert(6,obj.result_message);
+			}
+		};
+		$scope.ws.onclose = function(evt){ 
+			console.log("ws closed");
+			if($scope.is_operation){
+				$scope.connectSocket($scope.socket_url,$scope.socket_type);	
+			} else {
+				return 0;
+			}
+		//	window.location.reload();
+		}
+		$scope.ws.onerror = function(evt){console.log("WebSocketError!");};	
+	}
+
+	$scope.createInfo={
+		"isShow":0,
+		"bullx":localStorage.bullx?JSON.parse(localStorage.bullx):{
+			"max_count_type":2,   // 1六人房  2九人房  3十二人  4十人
+			"ticket_type":1,
+			"score_type":1,   
+			"rule_type":2,   //规则 1: 牛牛x3牛九x2牛八x2      2: 牛牛x4牛九x3牛八x2牛七x2
+			"is_laizi":0,      //是否有赖子
+			"is_cardfive":1, //牌型 五花牛(5倍)  1表示默认勾选 
+			"is_cardbomb":1, //牌型 炸弹牛(6倍) 
+			"is_cardtiny":1, //牌型 五小牛(8倍) 
+			"is_cardfour":1,
+			"is_flush":1,
+			"is_calabash":1,
+			"is_straight":1,
+			"is_sequence":1,
+			"banker_mode":2, //模式 2 明牌抢庄
+			"banker_score":4,
+			"bet_type":2,
+			"banker1":"unselected",
+			"banker2":"selected",
+			"banker3":"unselected",
+			"banker4":"unselected",
+			"banker5":"unselected",
+			"ready_time":'10',
+			"grab_time":'10',
+			"bet_time":'10',
+			"show_time":'10'
+		},
+
+		"flower":localStorage.flower?JSON.parse(localStorage.flower):{
+			"max_count_type":1,   // 1六人房  2九人房
+			'chip_type': 1,
+			'default_score': 4,
+			'chip_type': 1,
+			'disable_look': 0,
+			'disable_pk': 0,
+			'upper_limit': 1000,
+			'pk_score': 0,
+			'look_score': 0,
+			'ticket_type': 1,
+		},
+		"sangong":localStorage.sangong?JSON.parse(localStorage.sangong):{
+			"ticket_type":1,
+			"score_type":1,   
+			"max_count_type":1,   // 1六人房  2九人房
+			"is_cardjoker":1, //天公x10,雷公x7,地公x5  1表示默认勾选 
+			"is_cardbao9":1,  //暴玖x9				 1表示默认勾选 
+			"banker_mode":4, //模式 2 明牌抢庄 4经典
+			"banker_score":4,
+			"banker1":"unselected",
+			"banker2":"unselected",
+			"banker4":"selected",
+		},
+		"erbagang":localStorage.erbagang?JSON.parse(localStorage.erbagang):{
+			"banker_mode":1,  //模式 1 自由抢庄
+			"score_type":1,   //上庄分数类型
+			"chip_type":1,   //筹码组选项
+			"rule_type":2,    //规则
+			"ticket_count":1,
+			"banker1":"selected",
+			"banker2":"unselected",
+		},
+		"landlord":localStorage.landlord?JSON.parse(localStorage.landlord):{
+			"ticket_count":1,
+			"base_score":1,
+			"ask_mode":1,
+		},
+		"majiang":localStorage.majiang?JSON.parse(localStorage.majiang):{
+			"joker":0,
+			"horse_count":0,
+			"qianggang":0,
+			"ticket_count":1,
+			"chengbao":0,	
+		},
+		"xiaxie": localStorage.xiaxie?JSON.parse(localStorage.xiaxie) : {
+		    'chip_type': 1,
+		    'ticket_type': 1,
+		    'rule_value1': 1,
+		    'upper_limit': 100,
+		},
+		"paijiu":localStorage.paijiu?JSON.parse(localStorage.paijiu):{
+		    "ticket_type":1,
+		    "score_type":1,
+		    "banker_mode":2, //模式 2 明牌抢庄
+		    "banker1":"unselected",
+		    "banker2":"selected",
+		},
+		//大吃小牛牛 默认建房选项
+		"dxbull":localStorage.dxbull?JSON.parse(localStorage.dxbull):{
+		    "ticket_type":1,
+		    "bet_type":1,
+		    "is_cardfive":1, //牌型 五花牛(5倍)  1表示默认勾选 
+		    "is_cardbomb":1, //牌型 炸弹牛(6倍) 
+		    "is_cardtiny":1, //牌型 五小牛(8倍) 
+		},
+		//大吃小 默认建房选项
+		"dcx":localStorage.dcx?JSON.parse(localStorage.dcx):{
+		    "max_count_type":1,   // 1九人房  2十二人房
+		    "ticket_type":1,
+		    "bet_type":1,
+		    "is_cardjoker":0, //天公x10,雷公x7,地公x5  1表示默认勾选 
+		    "is_cardbao9":0,  //暴玖x9                 1表示默认勾选 
+		},
+		//赖子牛牛 默认建房选项
+		"laibull":localStorage.laibull?JSON.parse(localStorage.laibull):{
+		    "max_count_type":2,   // 1六人房   2九人房  3十二人房
+		    "ticket_type":1,
+		    "score_type":1,
+		    "rule_type":2,   //规则 1: 牛牛x3牛九x2牛八x2      2: 牛牛x4牛九x3牛八x2牛七x2
+		    "is_cardfive":1, //牌型 五花牛(5倍)  1表示默认勾选 
+		    "is_cardbomb":1, //牌型 炸弹牛(6倍) 
+		    "is_cardtiny":1, //牌型 五小牛(8倍) 
+		    "is_cardfour":1,
+		    "is_flush":1,
+		    "is_calabash":1,
+		    "is_straight":1,
+		    "is_sequence":1,
+		    "banker_mode":2, //模式 2 明牌抢庄
+		    "banker_score":0,
+		    "bet_type":2,
+		    "banker1":"unselected",
+		    "banker2":"selected",
+		    "ready_time":'10',
+		    "grab_time":'10',
+		    "bet_time":'10',
+		    "show_time":'10'
+		},
+	}
+
+	$scope.selectChange=function(type,num){
+		if($scope.createInfo.isShow==1){
+			if(type==1){
+				$scope.createInfo.bullx.score_type=num;
+			} else if(type==2){
+				$scope.createInfo.bullx.rule_type=num;
+			} else if(type==3){
+			    switch(num){
+			        case 1:
+			            $scope.createInfo.bullx.is_cardfour=($scope.createInfo.bullx.is_cardfour+1)%2;
+			            break;
+			        case 2:
+			            $scope.createInfo.bullx.is_cardfive=($scope.createInfo.bullx.is_cardfive+1)%2;
+			            break;
+			        case 3:
+			            $scope.createInfo.bullx.is_straight=($scope.createInfo.bullx.is_straight+1)%2;
+			            break;
+			        case 4:
+			            $scope.createInfo.bullx.is_flush=($scope.createInfo.bullx.is_flush+1)%2;
+			            break;
+			        case 5:
+			            $scope.createInfo.bullx.is_calabash=($scope.createInfo.bullx.is_calabash+1)%2;
+			            break;
+			        case 6:
+			            $scope.createInfo.bullx.is_cardbomb=($scope.createInfo.bullx.is_cardbomb+1)%2;
+			            break;
+			        case 7:
+			            $scope.createInfo.bullx.is_sequence=($scope.createInfo.bullx.is_sequence+1)%2;
+			            break;
+			        case 8:
+			            $scope.createInfo.bullx.is_cardtiny=($scope.createInfo.bullx.is_cardtiny+1)%2;
+			            break;
+			        case 9:
+			            $scope.createInfo.bullx.is_laizi=($scope.createInfo.bullx.is_laizi+1)%2;
+			            break;
+			    }
+			}
+			else if(type==4){
+				$scope.createInfo.bullx.ticket_type=num;
+			} else if (type == 5) {
+				$scope.createInfo.bullx.banker_score=num;
+			} else if(type==6){
+				$scope.createInfo.bullx.bet_type=num;
+			} else if(type==7){
+				$scope.createInfo.bullx.max_count_type=num;
+			}
+		} else if($scope.createInfo.isShow==4){
+			if(type==1){
+			    $scope.createInfo.flower.max_count_type=num;
+			} else if(type==2){
+			    $scope.createInfo.flower.default_score=num;
+			} else if(type==3){
+			    $scope.createInfo.flower.chip_type=num;
+			} else if(type==4){
+			    if (num == 1) {
+			        $scope.createInfo.flower.disable_look=($scope.createInfo.flower.disable_look+1)%2;
+			    } else if (num == 2) {
+			        $scope.createInfo.flower.disable_pk=($scope.createInfo.flower.disable_pk+1)%2;
+			    }
+			} else if(type==5){
+			    $scope.createInfo.flower.upper_limit=num;
+			} else if(type==6){
+			    $scope.createInfo.flower.pk_score=num;
+			} else if(type==7){
+			    $scope.createInfo.flower.look_score=num;
+			} else if(type==8){
+			    $scope.createInfo.flower.ticket_type=num;
+			}
+		} else if($scope.createInfo.isShow==5){	//三公
+			if(type==1){
+				$scope.createInfo.sangong.score_type=num;
+			}else if(type==2){
+				$scope.createInfo.sangong.max_count_type=num;
+			}
+			else if(type==3){
+				if(num==1)
+					$scope.createInfo.sangong.is_cardjoker=($scope.createInfo.sangong.is_cardjoker+1)%2;
+				else if(num==2)
+					$scope.createInfo.sangong.is_cardbao9=($scope.createInfo.sangong.is_cardbao9+1)%2;
+			}
+			else if(type==4){
+				$scope.createInfo.sangong.ticket_type=num;
+			} else if (type == 5) {
+				$scope.createInfo.sangong.banker_score=num;
+			}
+		} else if($scope.createInfo.isShow==6){
+			if(type==1){
+				$scope.createInfo.erbagang.score_type=num;
+			}
+			else if(type==2){
+				$scope.createInfo.erbagang.chip_type=num;
+			}
+			else if(type==3){
+				$scope.createInfo.erbagang.rule_type=num;
+			}
+			else if(type==4){
+				$scope.createInfo.erbagang.ticket_count=num;
+			} 
+		} else if($scope.createInfo.isShow==7){
+			if (type==1) {
+				$scope.createInfo.landlord.base_score = num;
+			} else if (type==2) {
+				$scope.createInfo.landlord.ask_mode = num;
+			} else if(type==3) {
+				$scope.createInfo.landlord.ticket_count = num;
+			}
+		} else if($scope.createInfo.isShow==8){
+			if(type==1){
+				$scope.createInfo.majiang.joker=num;
+			}
+			else if(type==2){
+				$scope.createInfo.majiang.horse_count=num;
+			}
+			else if(type==3){
+				$scope.createInfo.majiang.qianggang=($scope.createInfo.majiang.qianggang+1)%2;
+			}
+			else if(type==4){
+				$scope.createInfo.majiang.ticket_count=num;
+			}
+			else if(type==5){
+				$scope.createInfo.majiang.chengbao=($scope.createInfo.majiang.chengbao+1)%2;
+			}
+		} else if($scope.createInfo.isShow==9){
+            if(type==1){
+                $scope.createInfo.xiaxie.chip_type=num;
+            } else if(type==2){
+                if (num == 1) {
+                    $scope.createInfo.xiaxie.rule_value1 = ($scope.createInfo.xiaxie.rule_value1+1)%2;
+                }
+            }
+            else if(type==3){
+                $scope.createInfo.xiaxie.ticket_type=num;
+            }
+            else if(type==4){
+                $scope.createInfo.xiaxie.upper_limit=num;
+            }
+        } else if($scope.createInfo.isShow==10){
+		    if(type==1){
+		        $scope.createInfo.paijiu.score_type=num;
+		    }else if(type==4){
+		        $scope.createInfo.paijiu.ticket_type=num;
+		    }
+		} else if($scope.createInfo.isShow==12){
+            if(type==1){
+                $scope.createInfo.dxbull.bet_type=num;
+            }
+            else if(type==3){
+                if(num==1)
+                    $scope.createInfo.dxbull.is_cardfive=($scope.createInfo.dxbull.is_cardfive+1)%2;
+                else if(num==2)
+                    $scope.createInfo.dxbull.is_cardbomb=($scope.createInfo.dxbull.is_cardbomb+1)%2;
+                else if(num==3)
+                    $scope.createInfo.dxbull.is_cardtiny=($scope.createInfo.dxbull.is_cardtiny+1)%2;
+            }
+            else if(type==4){
+                $scope.createInfo.dxbull.ticket_type=num;
+            }
+        } else if($scope.createInfo.isShow==13){
+            if(type==1){
+                $scope.createInfo.dcx.bet_type=num;
+            } else if(type==3){
+                if(num==1)
+                    $scope.createInfo.dcx.is_cardjoker=($scope.createInfo.dcx.is_cardjoker+1)%2;
+                else if(num==2)
+                    $scope.createInfo.dcx.is_cardbao9=($scope.createInfo.dcx.is_cardbao9+1)%2;
+            } else if(type==4){
+                $scope.createInfo.dcx.ticket_type=num;
+            } else if(type==6){
+                $scope.createInfo.dcx.max_count_type=num;
+            }
+        } else if($scope.createInfo.isShow==14){
+            if(type==1){
+                $scope.createInfo.laibull.score_type=num;
+            }
+            else if(type==2){
+                $scope.createInfo.laibull.rule_type=num;
+            }
+            else if(type==3){
+                switch(num){
+                    case 1:
+                        $scope.createInfo.laibull.is_cardfour=($scope.createInfo.laibull.is_cardfour+1)%2;
+                        break;
+                    case 2:
+                        $scope.createInfo.laibull.is_cardfive=($scope.createInfo.laibull.is_cardfive+1)%2;
+                        break;
+                    case 3:
+                        $scope.createInfo.laibull.is_straight=($scope.createInfo.laibull.is_straight+1)%2;
+                        break;
+                    case 4:
+                        $scope.createInfo.laibull.is_flush=($scope.createInfo.laibull.is_flush+1)%2;
+                        break;
+                    case 5:
+                        $scope.createInfo.laibull.is_calabash=($scope.createInfo.laibull.is_calabash+1)%2;
+                        break;
+                    case 6:
+                        $scope.createInfo.laibull.is_cardbomb=($scope.createInfo.laibull.is_cardbomb+1)%2;
+                        break;
+                    case 7:
+                        $scope.createInfo.laibull.is_sequence=($scope.createInfo.laibull.is_sequence+1)%2;
+                        break;
+                    case 8:
+                        $scope.createInfo.laibull.is_cardtiny=($scope.createInfo.laibull.is_cardtiny+1)%2;
+                        break;
+                }
+            }
+            else if(type==4){
+                $scope.createInfo.laibull.ticket_type=num;
+            } else if (type == 5) {
+                $scope.createInfo.laibull.max_count_type=num;
+            } else if(type==6){
+                $scope.createInfo.laibull.bet_type=num;
+            }
+        }         
+	}
+	$scope.createBullx=function(){
+		$(".createRoom .mainPart").css('height','');
+		$(".createRoom .mainPart .blueBack").css('height','');
+		$scope.createInfo.isShow=1;		
+	}
+	$scope.createFlower=function(){
+		$(".createRoom .mainPart").css('height','');
+		$(".createRoom .mainPart .blueBack").css('height','');
+		$scope.createInfo.isShow=4;		
+	}
+    $scope.createSangong=function(){
+		$(".createRoom .mainPart").css('height','');
+		$(".createRoom .mainPart .blueBack").css('height','');
+		$scope.createInfo.isShow=5;		
+	}
+    $scope.createErba=function(){
+		$(".createRoom .mainPart").css('height','');
+		$(".createRoom .mainPart .blueBack").css('height','');
+		$scope.createInfo.isShow=6;		
+	}
+	$scope.createLandlord=function(){
+		$(".createRoom .mainPart").css('height','');
+		$(".createRoom .mainPart .blueBack").css('height','');
+		$scope.createInfo.isShow=7;	
+	}			
+	$scope.createMajiang=function(){
+		$(".createRoom .mainPart").css('height','');
+		$(".createRoom .mainPart .blueBack").css('height','');
+		$scope.createInfo.isShow=8;		
+	}
+	$scope.createXiaxie=function(){
+		$(".createRoom .mainPart").css('height','');
+		$(".createRoom .mainPart .blueBack").css('height','');
+		$scope.createInfo.isShow=9;		
+	}
+	$scope.createPaijiu=function(){
+		$(".createRoom .mainPart").css('height','');
+		$(".createRoom .mainPart .blueBack").css('height','');
+		$scope.createInfo.isShow=10;		
+	}
+	$scope.createDxBull=function(){
+		$(".createRoom .mainPart").css('height','');
+		$(".createRoom .mainPart .blueBack").css('height','');
+		$scope.createInfo.isShow=12;		
+	}
+	$scope.createDcx=function(){
+		$(".createRoom .mainPart").css('height','');
+		$(".createRoom .mainPart .blueBack").css('height','');
+		$scope.createInfo.isShow=13;		
+	}
+	$scope.createLaiBull=function(){
+	    $(".createRoom .mainPart").css('height','');
+	    $(".createRoom .mainPart .blueBack").css('height','');
+	    $scope.createInfo.isShow=14;     
+	}
+
+	$scope.selectBankerMode6 = function (type) {
+		$scope.createInfo.bullx.banker1 = "unselected";
+		$scope.createInfo.bullx.banker2 = "unselected";
+		$scope.createInfo.bullx.banker3 = "unselected";
+		$scope.createInfo.bullx.banker4 = "unselected";
+		$scope.createInfo.bullx.banker5 = "unselected";
+		$scope.createInfo.bullx['banker'+type] = "selected";
+		$scope.createInfo.bullx.banker_mode = type;
+	};		
+
+	$scope.selectBankerModeSangong = function (type) {
+		$scope.createInfo.sangong.banker1 = "unselected";
+		$scope.createInfo.sangong.banker2 = "unselected";
+		$scope.createInfo.sangong.banker4 = "unselected";
+		$scope.createInfo.sangong['banker'+type] = "selected";
+		$scope.createInfo.sangong.banker_mode = type;
+	};
+	$scope.selectBankerModeErbagang = function (type) {
+		if (type == 1) {
+			$scope.createInfo.erbagang.banker1 = "selected";
+			$scope.createInfo.erbagang.banker2 = "unselected";
+		} else if (type == 2) {
+			$scope.createInfo.erbagang.banker1 = "unselected";
+			$scope.createInfo.erbagang.banker2 = "selected";
+		}
+		$scope.createInfo.erbagang.banker_mode = type;
+	};
+
+	$scope.selectBankerModePaijiu = function (type) {
+	    $scope.createInfo.paijiu.banker1 = "unselected";
+	    $scope.createInfo.paijiu.banker2 = "unselected";
+	    $scope.createInfo.paijiu['banker'+type] = "selected";
+	    $scope.createInfo.paijiu.banker_mode = type;
+	};
+
+	$scope.selectBankerModeLaibull = function (type) {
+	    $scope.createInfo.laibull.banker1 = "unselected";
+	    $scope.createInfo.laibull.banker2 = "unselected";
+	    $scope.createInfo.laibull['banker'+type] = "selected";
+	    $scope.createInfo.laibull.banker_mode = type;
+	};
+
+	$scope.createCommit = function () {
+		if ($scope.userInfo.card>0){
+			if($scope.is_operation){
+				return 0;
+			}
+
+			$scope.waiting();
+
+			switch($scope.createInfo.isShow){
+				case 1:
+					$scope.connectSocket("ws://47.106.183.44:30012", $scope.createInfo.isShow);
+					localStorage.bullx = JSON.stringify($scope.createInfo.bullx);
+					break;
+				case 4:
+					$scope.connectSocket("ws://47.106.183.44:30042", $scope.createInfo.isShow);
+					localStorage.flower = JSON.stringify($scope.createInfo.flower);
+					break;
+				case 5:
+					$scope.connectSocket("ws://47.106.183.44:30052", $scope.createInfo.isShow);
+					localStorage.sangong = JSON.stringify($scope.createInfo.sangong);
+					break;
+				case 6:
+					$scope.connectSocket("ws://47.106.183.44:30062", $scope.createInfo.isShow);
+					localStorage.erbagang = JSON.stringify($scope.createInfo.erbagang);
+					break;
+				case 7:
+					$scope.connectSocket("ws://47.106.183.44:30072", $scope.createInfo.isShow);
+					localStorage.landlord = JSON.stringify($scope.createInfo.landlord);
+					break;
+				case 8:
+					$scope.connectSocket("ws://47.106.183.44:30083", $scope.createInfo.isShow);
+					localStorage.majiang = JSON.stringify($scope.createInfo.majiang);
+					break;
+				case 9:
+				    $scope.connectSocket("ws://47.106.183.44:30092", $scope.createInfo.isShow);
+				    localStorage.xiaxie = JSON.stringify($scope.createInfo.xiaxie);
+				    break;
+				case 10:
+				    $scope.connectSocket("ws://47.106.183.44:30102", $scope.createInfo.isShow);
+				    localStorage.paijiu = JSON.stringify($scope.createInfo.paijiu);
+				    break;
+				case 12:
+				    $scope.connectSocket("ws://47.106.183.44:30122", $scope.createInfo.isShow);
+				    localStorage.dxbull = JSON.stringify($scope.createInfo.dxbull);
+				    break;
+				case 13:
+				    $scope.connectSocket("ws://47.106.183.44:30132", $scope.createInfo.isShow);
+				    localStorage.dcx = JSON.stringify($scope.createInfo.dcx);
+				    break;
+				case 14:
+				    $scope.connectSocket("ws://47.106.183.44:30142", $scope.createInfo.isShow);
+				    localStorage.laibull = JSON.stringify($scope.createInfo.laibull);
+				    break;
+			}		
+		} else {
+			$scope.showAlert(1,"房卡不足");
+		}		
+	}
+	$scope.cancelCreate=function(){
+		$scope.createInfo.isShow=0;
+	}
+})
+function randomString(len) {
+　　len = len || 32;
+　　var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+　　var maxPos = $chars.length;
+　　var pwd = '';
+　　for (i = 0; i < len; i++) {
+　　　　pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+　　}
+　　return pwd;
+}
+
+</script>
+<Script>
+	wx.config({    
+        debug: false,    
+        appId: "wx35f74a018d4c7e64",    
+        timestamp: "1538984076",    
+        nonceStr:"bda296e72bc42023490195ddf25abdbf",    
+        signature: "5e244b1fadc22795304acac2f46c8c9cd2ce9bd3",    
+        jsApiList: [    
+            'onMenuShareTimeline',    
+            'onMenuShareAppMessage',     
+            
+        ]    
+    });        
+	wx.ready(function () {
+		// wx.hideMenuItems({
+		// 	menuList: [
+		// 	    "menuItem:copyUrl",
+		// 	    "menuItem:share:qq",
+		// 	    "menuItem:share:weiboApp",
+		// 	    "menuItem:favorite",
+		// 	    "menuItem:share:facebook",
+		// 	    "menuItem:share:QZone"
+		// 	] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+		// });	
+		wx.onMenuShareTimeline({    
+	        title: "3848游玩",    
+	        desc: "3848游玩",    
+	        link: "http://3848youwan3.jgwzzq.cn/k/ha",    
+	        imgUrl: 'http://images.nefans.cn/files/images/hall/share_icon_hall.jpg',   
+	        success: function (){ 
+		        // 用户确认分享后执行的回调函数
+		    },
+		    cancel: function (){ 
+		        // 用户取消分享后执行的回调函数
+		    }   
+		});		
+		wx.onMenuShareAppMessage({    
+	        title: "3848游玩",    
+	        desc: "3848游玩",    
+	        link: "http://3848youwan3.jgwzzq.cn/k/ha",    
+	        imgUrl: 'http://images.nefans.cn/files/images/hall/share_icon_hall.jpg',   
+	        success: function (){ 
+		        // 用户确认分享后执行的回调函数
+		    },
+		    cancel: function (){ 
+		        // 用户取消分享后执行的回调函数
+		    }   
+		});		
+	});
+	wx.error(function (res) {    
+   //     alert("error: " + res.errMsg);    
+    });
+
+</script>
+</body>
+</html>
